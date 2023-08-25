@@ -599,6 +599,20 @@ input[type="email"] {
   color: #44b89d;
   text-transform: capitalize;
 }
+.radio_btn{
+  display: flex;
+  gap: 30px;
+}
+.lable_ctrl{
+  display: flex;
+  gap: 15px;
+}
+.radio_error{
+  top:25px;
+}
+.md_update input[type="text"]{
+  width: 100%;
+}
 /* media query */
 
 @media only screen and (max-width: 1199px) {

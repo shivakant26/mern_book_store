@@ -5,6 +5,9 @@ const initialState = {
   loginData: [],
   registerData : [],
   allUser:[],
+  delAuthor:[],
+  signleUserData:[],
+  updateAuthors:[],
   loading: false,
   error: null,
 };
@@ -44,6 +47,44 @@ export const registerUser = createAsyncThunk(
     }
   );
 
+  export const deleteAuthor = createAsyncThunk(
+    "auth/deleteAuthor",
+    async (id, { rejectWithValue, fulfillWithValue }) => {
+      try {
+        const response = await Instance.delete(`/users/${id}`);
+        return fulfillWithValue(response);
+      } catch (error) {
+        return rejectWithValue(error.response);
+      }
+    }
+  );
+
+  export const signleAuthor = createAsyncThunk(
+    "auth/signleAuthor",
+    async (data, { rejectWithValue, fulfillWithValue }) => {
+      const { _id, ...object } = data;
+      try {
+        const response = await Instance.put(`/users/${_id}`,object);
+        return fulfillWithValue(response);
+      } catch (error) {
+        return rejectWithValue(error.response);
+      }
+    }
+  );
+
+  export const updateAuthor = createAsyncThunk(
+    "auth/updateAuthor",
+    async (data, { rejectWithValue, fulfillWithValue }) => {
+      const { _id, ...object } = data;
+      try {
+        const response = await Instance.put(`/users/${_id}`,object);
+        return fulfillWithValue(response);
+      } catch (error) {
+        return rejectWithValue(error.response);
+      }
+    }
+  );
+
 const authSlice = createSlice({
   name: "auth",
   initialState: initialState,
@@ -51,6 +92,9 @@ const authSlice = createSlice({
     resetResp: (state) => {
       state.loginData = [];
       state.registerData = [];
+      state.delAuthor = [];
+      state.updateAuthors = [];
+      state.signleUserData = [];
       state.error = null;
     },
   },
@@ -89,9 +133,43 @@ const authSlice = createSlice({
       .addCase(allUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(deleteAuthor.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteAuthor.fulfilled, (state, action) => {
+        state.loading = false;
+        state.delAuthor = action.payload;
+      })
+      .addCase(deleteAuthor.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateAuthor.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateAuthor.fulfilled, (state, action) => {
+        state.loading = false;
+        state.updateAuthors = action.payload;
+      })
+      .addCase(updateAuthor.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(signleAuthor.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(signleAuthor.fulfilled, (state, action) => {
+        state.loading = false;
+        state.signleUserData = action.payload;
+      })
+      .addCase(signleAuthor.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
 
 export const { resetResp } = authSlice.actions;
 export default authSlice.reducer;
+

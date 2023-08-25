@@ -4,30 +4,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { deleteBook, getallBook, resetBookApi } from "../../redux/bookSlice";
 import Swal from "sweetalert2";
+import { Table } from "react-bootstrap";
 
 const BookList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { allBook , del_book} = useSelector((state) => state?.book);
+  const { allBook, del_book } = useSelector((state) => state?.book);
 
   useEffect(() => {
     dispatch(getallBook());
   }, [dispatch]);
 
-  useEffect(()=>{
-    if(del_book?.status === 200){
+  useEffect(() => {
+    if (del_book?.status === 200) {
       Swal.fire({
         icon: "error",
         text: `${del_book?.data?.message}`,
-      })
-    dispatch(getallBook());
-    dispatch(resetBookApi());
-    }else{}
-  },[del_book])
+      });
+      dispatch(getallBook());
+      dispatch(resetBookApi());
+    } else {
+    }
+  }, [del_book]);
 
-  const trashBook =(id) =>{
-    dispatch(deleteBook(id))
-  }
+  const trashBook = (id) => {
+    dispatch(deleteBook(id));
+  };
 
   return (
     <>
@@ -41,7 +43,7 @@ const BookList = () => {
         </button>
       </div>
       <div className="bk_table table-container">
-        <table>
+        <Table striped bordered hover size="sm">
           <thead>
             <tr>
               <th>S.No</th>
@@ -62,14 +64,22 @@ const BookList = () => {
                       <td>{book.bookName}</td>
                       <td>{book.description}</td>
                       <td>
-                        <img src={"http://localhost:8100/"+book.coverImgUrl} height="80px" width="60px" alt="image" />
+                        <img
+                          src={"http://localhost:8100/" + book.coverImgUrl}
+                          height="80px"
+                          width="60px"
+                          alt="image"
+                        />
                       </td>
                       <td>Yes</td>
-                      <td className="d-flex td_gap">
+                      <td rowSpan={1} className="d-flex td_gap">
                         <span className="edit_btn">
                           <FaEdit />
                         </span>
-                        <span className="delete_btn" onClick={()=>trashBook(book._id)}>
+                        <span
+                          className="delete_btn"
+                          onClick={() => trashBook(book._id)}
+                        >
                           <FaTrash />
                         </span>
                         <span className="view_btn">
@@ -88,7 +98,7 @@ const BookList = () => {
               </>
             )}
           </tbody>
-        </table>
+        </Table>
       </div>
     </>
   );
