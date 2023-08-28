@@ -82,7 +82,7 @@ const UpdateAuthor = ({ show, setShow, editData }) => {
                 error={errors.email}
               />
             </div>
-            <div className="form_field">
+            {/* <div className="form_field">
               <InputField
                 id="password"
                 type="text"
@@ -92,7 +92,7 @@ const UpdateAuthor = ({ show, setShow, editData }) => {
                 })}
                 error={errors.password}
               />
-            </div>
+            </div> */}
             <div className="form_field radio_btn">
               <label className="lable_ctrl">
                 <input

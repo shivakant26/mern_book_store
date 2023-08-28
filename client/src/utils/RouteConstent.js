@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import SingleUser from '../component/dashboard/SingleUser';
 const Logout = lazy(()=> import('../component/Logout'));
 const HomePage = lazy(() => import('../pages/index'));
 const Login = lazy(() => import('../component/Login'));
@@ -40,12 +41,20 @@ export const ProtectdRouteArray = [
         component:<AddBook />
     },
     {
+        path:"/add-book/:id",
+        component:<AddBook />
+    },
+    {
         path:"/book-list",
         component:<BookList />
     },
     {
         path:"/user-list",
         component:<UserList />
+    },
+    {
+        path:"/users/:id",
+        component:<SingleUser />
     },
     {
         path:"/logout",

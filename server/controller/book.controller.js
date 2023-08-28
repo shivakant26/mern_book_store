@@ -1,9 +1,8 @@
 const Book = require("./../model/book.model");
 const createBook = async(req, res) =>{
-    console.log(req.file)
-    const { bookName , description } = req.body;
+    const { bookName , description , authorName , price } = req.body;
     try {
-        if(!bookName || !description){
+        if(!bookName || !description || !authorName || !price){
             res.status(400).json({
                 message:"all filed is Required!"
             })
@@ -11,6 +10,8 @@ const createBook = async(req, res) =>{
         const book = await Book.create({
             bookName:bookName,
             description:description,
+            authorName:authorName,
+            price:price,
             coverImgUrl:`${req.file.destination}/${req.file.filename}`
         })
         res.status(200).json({
@@ -86,17 +87,17 @@ const deleteBook = async(req,res)=>{
 
 
 const updateBook = async(req , res) =>{
-    console.log(req.body ,req.params._id)
+    const {_id} = req.params
     try {
-        const book = await Book.findByIdAndUpdate(req.params._id,req.body,{new:true})
+        const book = await Book.findByIdAndUpdate(_id,req.body,{new:true})
         if(book === null){
             res.status(400).json({
-                message:"Product Not Aviable"
+                message:"Book Not Aviable"
             })
         }else{
             res.status(200).json({
                 data:book,
-                message:"product Update sucessfully"
+                message:"Book Update sucessfully"
             })
         }
     } catch (error) {

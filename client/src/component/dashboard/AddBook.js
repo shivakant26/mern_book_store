@@ -1,17 +1,83 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import InputField from "../common/InputField";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewBook, resetBookApi, updateBook } from "../../redux/bookSlice";
+import Swal from "sweetalert2";
+import Thumbnail from "../../assets/images/thumbnail.png";
+import { useLocation, useParams } from "react-router-dom";
 
 const AddBook = () => {
   const {
     handleSubmit,
     formState: { errors },
     register,
+    setValue,
+    reset,
   } = useForm();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const {id} = useParams();
+  const [editableId , setEditableId] = useState(id); 
+  console.log(123456,location?.state?.book?.coverImgUrl)
+  const editBookData = location?.state?.book;
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [file, setFile] = useState(null);
+  const { newBook , updateBookData } = useSelector((state)=>state?.book);
 
+  useEffect(()=>{
+    if(editableId){
+      setValue("bookName", editBookData.bookName);
+      setValue("price", editBookData.price);
+      setValue("authorName", editBookData.authorName);
+      setValue("description", editBookData.description);
+      setValue("coverImgUrl", `http://localhost:8100/${editBookData.coverImgUrl}`);
+      setSelectedImage(`http://localhost:8100/${editBookData.coverImgUrl}`)
+    }
+    
+  },[editBookData])
+
+  useEffect(()=>{
+    if(newBook.status === 200){
+      Swal.fire({
+        icon: "success",
+        text: `${newBook?.data?.message}`,
+      })
+      dispatch(resetBookApi());
+    }else if(updateBookData.status === 200){
+      Swal.fire({
+        icon: "success",
+        text: `${updateBookData?.data?.message}`,
+      })
+      dispatch(resetBookApi());
+    }else{}
+  },[newBook,updateBookData])
+
+    const handleImageChange = (e) => {
+      setFile(e.target.files[0])
+      const imageFile = e.target.files[0];
+      if (imageFile) {
+        setSelectedImage(URL.createObjectURL(imageFile));
+      }
+    };
+    
   const onSubmit = (data) => {
-    console.log(data);
+    let formData = new FormData();
+    formData.append("bookName",data.bookName);
+    formData.append("price",data.price);
+    formData.append("authorName",data.authorName);
+    formData.append("description",data.description);
+    formData.append("coverImgUrl",file);
+    if(editableId){
+      dispatch(updateBook({editableId,formData}))
+      setEditableId(null)
+    }else{
+      dispatch(addNewBook(formData))
+    }
+    setSelectedImage("");
+    reset();
   };
+
   return (
     <>
       <div className="dash_heading d-flex">
@@ -24,13 +90,13 @@ const AddBook = () => {
               <div className="bk_col_1">
                 <div className="form_field">
                   <InputField
-                    id="title"
+                    id="bookName"
                     type="text"
                     placeholder="Book Title"
-                    register={register("title", {
-                      required: "Title is required *",
+                    register={register("bookName", {
+                      required: "bookName is required *",
                     })}
-                    error={errors.title}
+                    error={errors.bookName}
                   />
                 </div>
                 <div className="form_field">
@@ -50,7 +116,7 @@ const AddBook = () => {
                     type="text"
                     placeholder="Author Name"
                     register={register("authorName", {
-                      required: "authorName is required *",
+                      required: "Author Name is required *",
                     })}
                     error={errors.authorName}
                   />
@@ -58,7 +124,21 @@ const AddBook = () => {
               </div>
               <div className="bk_col_2">
                 <div className="bk_cover_image">
-                    <input type="file" />
+                  <img src={ selectedImage ? selectedImage : Thumbnail} alt="Selected" />
+                </div>
+                <div className="form_field">
+                  <input
+                    id="coverImgUrl"
+                    type="file"
+                    {...register("coverImgUrl", {
+                      required: "Cover Image is required *",
+                    })}
+                    onChange={(e)=>handleImageChange(e)}
+
+                  />
+                  {errors.coverImgUrl && (
+                    <p className="error">{errors.coverImgUrl.message}</p>
+                  )}
                 </div>
               </div>
             </div>

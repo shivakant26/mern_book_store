@@ -4,6 +4,8 @@ import Instance from "../api/apiConfig";
 const initialState = {
   allBook: [],
   del_book : [],
+  newBook : [],
+  updateBookData : [],
   loading: false,
   error: null,
 };
@@ -32,12 +34,39 @@ const initialState = {
     }
   );
 
+  export const addNewBook = createAsyncThunk(
+    "book/addNewBook",
+    async (data, { rejectWithValue, fulfillWithValue }) => {
+      try {
+        const response = await Instance.post("/book",data);
+        return fulfillWithValue(response);
+      } catch (error) {
+        return rejectWithValue(error.response);
+      }
+    }
+  );
+
+  export const updateBook = createAsyncThunk(
+    "book/updateBook",
+    async ({ editableId, formData }, { rejectWithValue, fulfillWithValue }) => {
+      try {
+        const response = await Instance.put(`/book/${editableId}`,formData);
+        return fulfillWithValue(response);
+      } catch (error) {
+        return rejectWithValue(error.response);
+      }
+    }
+  );
+
 const bookSlice = createSlice({
   name: "book",
   initialState: initialState,
   reducers: {
     resetBookApi: (state) => {
       state.getallBook = [];
+      state.del_book = [];
+      state.newBook = [];
+      state.updateBookData = [];
       state.error = null;
     },
   },
@@ -62,6 +91,28 @@ const bookSlice = createSlice({
         state.del_book = action.payload;
       })
       .addCase(deleteBook.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(addNewBook.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addNewBook.fulfilled, (state, action) => {
+        state.loading = false;
+        state.newBook = action.payload;
+      })
+      .addCase(addNewBook.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateBook.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateBook.fulfilled, (state, action) => {
+        state.loading = false;
+        state.updateBookData = action.payload;
+      })
+      .addCase(updateBook.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

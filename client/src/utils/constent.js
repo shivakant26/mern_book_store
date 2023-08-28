@@ -85,7 +85,8 @@ export const whatSayData = [
     },
     {
         labelName:"about",
-        isScrollLink: true 
+        isScrollLink: true,
+        routePath: "/about"  
     },
     {
         labelName:"category",

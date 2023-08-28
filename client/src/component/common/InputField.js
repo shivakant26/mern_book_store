@@ -8,6 +8,7 @@ const InputField = ({
   placeholder,
   inputMode,
   error,
+  onChange,
   label
 }) => {
   return (
@@ -16,6 +17,7 @@ const InputField = ({
         type={type}
         id={id}
         name={name}
+        onChange={onChange}
         inputMode={type === "tel" ? "numeric" : undefined}
         placeholder={placeholder}
         {...register}

@@ -5,6 +5,9 @@
   display: flex;
   flex-wrap: wrap;
 }
+.radio_gap{
+  gap:15px;
+}
 .sidebar {
   transition: .4s;
   width: 20%;
@@ -41,8 +44,12 @@
 }
 .dash_content {
   transition: .4s;
-  width: 75%;
+  width: 80%;
   padding: 20px;
+}
+.breadcamb{
+  box-shadow: 0px 0px 7px rgba(0,0,0,0.5);
+  padding: 7px 20px;
 }
 /* bk Table */
 .table-container {
@@ -62,6 +69,7 @@ th {
 }
 .td_gap{
   gap:10px;
+  padding: 32px 0px !important;
   justify-content: center;
 }
 
@@ -110,7 +118,7 @@ padding: 30px 0px;
 }
 .dash_content_large {
   transition: .4s;
-  width: 90%;
+  width: 94%;
   padding: 20px;
 }
 .sidebar_short .user_details img {
@@ -140,7 +148,10 @@ padding: 30px 0px;
 .drawyer_dash_menu ul li span:nth-child(2) {
   display: none;
 }
-
+.center-align {
+  text-align: center;
+  vertical-align: middle;
+}
  /* dash board btn*/
  .add_item{
   padding: 13px 12px;
@@ -171,6 +182,10 @@ padding: 30px 0px;
   height: 162px;
   width: 219px;
   border: 2px dashed #e8e5e5;
+}
+.bk_cover_image img{
+  width: 100%;
+  height: 157px;
 }
 .edit_btn,.delete_btn,.view_btn{
   cursor: pointer;

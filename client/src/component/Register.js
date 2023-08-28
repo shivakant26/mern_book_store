@@ -16,8 +16,6 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { registerData , loading , error } = useSelector((state)=>state?.auth)
-  console.log(123456,registerData , loading , error) 
-
 
   useEffect(() => {
     if (registerData?.status === 200) {
@@ -84,7 +82,7 @@ const Register = () => {
                       error={errors.email}
                     />
                   </div>
-                  <div className="form_field">
+                  <div className="form_field ">
                     <InputField
                       id="password"
                       type="text"
@@ -95,8 +93,8 @@ const Register = () => {
                       error={errors.password}
                     />
                   </div>
-                  <div className="form_field">
-                    <label>
+                  <div className="form_field d-flex radio_gap">
+                    <label className="d-flex radio_gap">
                       <input
                         type="radio"
                         name="gender"
@@ -107,7 +105,7 @@ const Register = () => {
                       />
                       Male
                     </label>
-                    <label>
+                    <label className="d-flex radio_gap">
                       <input
                         type="radio"
                         name="gender"
@@ -119,7 +117,7 @@ const Register = () => {
                       Female
                     </label>
                   {errors.gender && (
-                    <p className="error">{errors.gender.message}</p>
+                    <p className="error" style={{top:"24px"}}>{errors.gender.message}</p>
                   )}
                   </div>
                   <div className="form_field">

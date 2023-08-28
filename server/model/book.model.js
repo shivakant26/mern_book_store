@@ -4,6 +4,12 @@ const bookSchema = mongoose.Schema({
     bookName:{
         type:String
     },
+    authorName:{
+        type:String
+    },
+    price:{
+        type:Number
+    },
     description:{
         type:String
     },

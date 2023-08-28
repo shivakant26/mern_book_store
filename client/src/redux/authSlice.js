@@ -26,6 +26,7 @@ export const loginUser = createAsyncThunk(
 export const registerUser = createAsyncThunk(
     "auth/registerUser",
     async (data, { rejectWithValue, fulfillWithValue }) => {
+      debugger
       try {
         const response = await Instance.post("/signup", data);
         return fulfillWithValue(response);

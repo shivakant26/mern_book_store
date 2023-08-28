@@ -31,6 +31,13 @@ const BookList = () => {
     dispatch(deleteBook(id));
   };
 
+  const editBook = (book) =>{
+    navigate(`/add-book/${book._id}`, {
+      state: {
+        book,
+      },
+    });
+  }
   return (
     <>
       <div className="dash_heading d-flex">
@@ -60,9 +67,9 @@ const BookList = () => {
                 {allBook?.data?.data?.map((book, index) => {
                   return (
                     <tr>
-                      <td>{index + 1}</td>
-                      <td>{book.bookName}</td>
-                      <td>{book.description}</td>
+                      <td className="center-align">{index + 1}</td>
+                      <td className="center-align">{book.bookName}</td>
+                      <td className="center-align">{book.description}</td>
                       <td>
                         <img
                           src={"http://localhost:8100/" + book.coverImgUrl}
@@ -71,9 +78,9 @@ const BookList = () => {
                           alt="image"
                         />
                       </td>
-                      <td>Yes</td>
-                      <td rowSpan={1} className="d-flex td_gap">
-                        <span className="edit_btn">
+                      <td className="center-align" >Yes</td>
+                      <td className="d-flex td_gap">
+                        <span className="edit_btn" onClick={()=>editBook(book)}>
                           <FaEdit />
                         </span>
                         <span

@@ -20,10 +20,10 @@ const signUp = async (req, res) => {
       }
       const hasedPassword = await hashPassword(password, 10);
       const author = await Author.create({
-        fullName: req.body.fullName,
-        email: req.body.email,
+        fullName: fullName,
+        email:email,
         password: hasedPassword,
-        gender: req.body.gender,
+        gender: gender,
       });
       res.status(200).json({
         data: author,

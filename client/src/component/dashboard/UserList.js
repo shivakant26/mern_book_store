@@ -11,6 +11,7 @@ const UserList = () => {
   const [show, setShow] = useState(false);
   const [editData, setEditData] = useState();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { allUser, error, delAuthor } = useSelector((state) => state?.auth);
 
   useEffect(() => {
@@ -36,6 +37,15 @@ const UserList = () => {
     setShow(true);
     setEditData(item);
   };
+
+  const viewUser = (item) =>{
+    navigate(`/users/${item._id}`, {
+      state: {
+        item,
+      },
+    });
+  }
+
   return (
     <>
       {show && (
@@ -62,11 +72,11 @@ const UserList = () => {
                 {allUser?.data?.data?.map((item, index) => {
                   return (
                     <tr>
-                      <td>{index + 1}</td>
-                      <td>{item.fullName}</td>
-                      <td>{item.email}</td>
-                      <td>{item.gender}</td>
-                      <td>Active</td>
+                      <td className="center-align">{index + 1}</td>
+                      <td className="center-align">{item.fullName}</td>
+                      <td className="center-align">{item.email}</td>
+                      <td className="center-align">{item.gender}</td>
+                      <td className="center-align">Active</td>
                       <td className="d-flex td_gap">
                         <span
                           className="edit_btn"
@@ -80,7 +90,7 @@ const UserList = () => {
                         >
                           <FaTrash />
                         </span>
-                        <span className="view_btn">
+                        <span className="view_btn" onClick={()=>viewUser(item)}>
                           <FaEye />
                         </span>
                       </td>
