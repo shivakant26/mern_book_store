@@ -2,7 +2,7 @@ const Book = require("./../model/book.model");
 const createBook = async(req, res) =>{
     const { bookName , description , authorName , price } = req.body;
     try {
-        if(!bookName || !description || !authorName || !price){
+        if(!bookName || !description || !price){
             res.status(400).json({
                 message:"all filed is Required!"
             })
@@ -47,7 +47,7 @@ const allBook = async(req,res)=>{
 
 const singleBook = async(req,res)=>{
     try {     
-        const book = await Book.find({_id:req.params._id});
+        const book = await Book.find({_id:req.params._id}).populate("authorName",{fullName:1,_id:0});
         if(book){
             res.status(200).json({
                 data:book,

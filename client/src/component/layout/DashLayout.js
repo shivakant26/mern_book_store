@@ -6,6 +6,7 @@ import {FaBell} from "react-icons/fa";
 const DashBoardLayout = () => {
   const [dShow, setDShow] = useState(false);
   const location = useLocation();
+  const userToken = localStorage.getItem('token');
   return (
     <>
       <div className="dashboard_page">
@@ -22,7 +23,7 @@ const DashBoardLayout = () => {
           </div>
         </div>
         <div className="dashboard_section d-flex">
-          <SideBar dShow={dShow} setDShow={setDShow} />
+          <SideBar dShow={dShow} setDShow={setDShow} userToken={userToken}/>
           <div className={dShow ? "dash_content_large" : "dash_content"}>
             <div className="breadcamb">
               Dashboard / {location.pathname.replace("/", "")}

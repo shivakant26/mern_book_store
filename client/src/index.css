@@ -78,9 +78,7 @@ code {
   background-color: #063547;
 }
 .header_sec {
-  display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
   align-items: center;
 }
 .site_logo h2 {
@@ -91,15 +89,12 @@ code {
   color: #fff;
   text-decoration: none;
 }
-/* .site_menu{
-  padding: 12px 0px;
-} */
 .site_menu ul {
+  display: flex;
+  flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
   align-items: center;
-  display: flex;
-  flex-wrap: wrap;
   gap: 20px;
   margin: 0;
 }
@@ -151,8 +146,6 @@ input[type="search"]:focus {
 }
 /* benner */
 .banner_inner {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
   padding: 75px 0;
 }
@@ -218,8 +211,6 @@ input[type="search"]:focus {
   background-color: #f5f6f9;
 }
 .about_book {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
 }
 .about_book .right_sec img {
@@ -237,8 +228,6 @@ input[type="search"]:focus {
 
 /* book seller section */
 .book_seller {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 .seller_book_card {
@@ -296,8 +285,6 @@ input[type="search"]:focus {
   padding: 30px 0px;
 }
 .profile {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 25px;
 }
@@ -347,8 +334,6 @@ input[type="search"]:focus {
   background-color: #f5f6f9;
 }
 .blog_crd_group {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
 }
 .blog_card {
@@ -386,8 +371,6 @@ input[type="search"]:focus {
 
 /* constact us */
 .constact_us {
-  display: flex;
-  flex-wrap: wrap;
   align-items: center;
 }
 .constact_us_form {
@@ -504,16 +487,17 @@ input[type="email"] {
   color: #44b89d;
 }
 .footer {
-  display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 .map-container {
   width: 200px;
   height: 200px;
   position: relative;
 }
-
+.copyright_section p {
+  margin: 0;
+  padding: 20px 0px;
+}
 /* humberger menu */
 .hamburger-button {
   outline: none;
@@ -563,7 +547,7 @@ input[type="email"] {
 }
 .panel ul li a {
   text-decoration: none;
-  color: #fff;
+  color: #fff !important;
 }
 .crediential_btn {
   position: relative;
@@ -598,18 +582,18 @@ input[type="email"] {
   color: #44b89d;
   text-transform: capitalize;
 }
-.radio_btn{
+.radio_btn {
   display: flex;
   gap: 30px;
 }
-.lable_ctrl{
+.lable_ctrl {
   display: flex;
   gap: 15px;
 }
-.radio_error{
-  top:25px;
+.radio_error {
+  top: 25px;
 }
-.md_update input[type="text"]{
+.md_update input[type="text"] {
   width: 100%;
 }
 /* media query */
@@ -630,6 +614,9 @@ input[type="email"] {
     width: 42%;
     text-align: left;
     margin: 20px;
+  }
+  input[type="file"] {
+    width: 100%;
   }
   .section_heading h3 {
     font-size: 29px;
@@ -659,23 +646,19 @@ input[type="email"] {
   .mobile_menu ul li a {
     text-transform: capitalize;
   }
-  input[type="search"] {
-    width: 100%;
-  }
   .bx-content h1 {
     padding: 0px 15px 0px 0px;
     font-size: 35px;
   }
-  .sidebar {
+  .sidebar,
+  .dash_content,
+  input[type="search"] {
     width: 100% !important;
   }
-  .dwayer{
+  .dwayer {
     display: none !important;
   }
-  .dash_content {
-    width: 100%;
-  }
-  .dashboard_section{
+  .dashboard_section {
     justify-content: center;
   }
   .dash_card {
@@ -684,18 +667,21 @@ input[type="email"] {
 }
 
 @media only screen and (max-width: 649px) {
-  .blog_card {
-    width: 100%;
+  .cards {
+    width: 45%;
   }
-  .right_sec {
-    width: 47%;
+  .blog_card,
+  .left_sec,
+  .right_sec,
+  .about_book .left_sec,
+  .contact_us_image,
+  .constact_us_form,
+  .bk_col_1,
+  .bk_col_2 {
+    width: 100%;
   }
   .constact_us_form {
-    width: 100%;
     text-align: center;
-  }
-  .contact_us_image {
-    width: 100%;
   }
   .seller_book_card {
     width: 43%;
@@ -703,56 +689,44 @@ input[type="email"] {
   .dash_card {
     width: 44% !important;
   }
-  .bk_col_1 ,.bk_col_2{
-    width: 100% !important;
-}
-.bk_cover_image {
-  width: 93% !important;
-  margin-bottom: 18px !important;
-}
+  .bk_cover_image {
+    width: 93% !important;
+    margin-bottom: 18px !important;
+  }
 }
 
 @media only screen and (max-width: 479px) {
   .layout_padding {
     padding: 24px 0px;
   }
-  .map-container {
-    width: 100%;
-  }
   .bx-content p {
     padding: 0;
   }
-  .right_sec {
-    width: 100%;
-  }
-  .left_sec {
-    width: 100%;
+  .right_sec,
+  .sub_btn,
+  .dash_card,
+  .c-width,
+  input[type="file"],
+  .about_book .left_sec,
+  .map-container {
+    width: 100% !important;
   }
   .card {
     width: 85%;
   }
-  .about_book .left_sec {
-    width: 100%;
-  }
   .cs_say_card {
     width: 94%;
-  }
-  .c-width {
-    width: 100%;
-  }
-  .sub_btn {
-    width: 93%;
   }
   .seller_book_card {
     width: 74%;
   }
-  .dash_card {
-    width: 100% !important;
-  }
   .chart-container {
     max-width: none;
   }
-  canvas{
+  canvas {
     width: 250px !important;
+  }
+  .cards {
+    width: 85%;
   }
 }

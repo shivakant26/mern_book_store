@@ -8,7 +8,7 @@ const Header = () => {
     <>
       <div className="bk_header">
         <div className="center_wr">
-          <div className="header_sec">
+          <div className="header_sec d-flex">
             <div className="site_logo">
               <Link to="/">
                 <h2>Book- Store</h2>

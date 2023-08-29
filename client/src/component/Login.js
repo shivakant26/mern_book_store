@@ -32,7 +32,6 @@ const Login = () => {
       })
       dispatch(resetResp());
     }else{
-
     }
   },[loginData, loading, error , dispatch , navigate]);
 

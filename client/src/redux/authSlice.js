@@ -3,11 +3,11 @@ import Instance from "../api/apiConfig";
 
 const initialState = {
   loginData: [],
-  registerData : [],
-  allUser:[],
-  delAuthor:[],
-  signleUserData:[],
-  updateAuthors:[],
+  registerData: [],
+  allUser: [],
+  delAuthor: [],
+  signleUserData: [],
+  updateAuthors: [],
   loading: false,
   error: null,
 };
@@ -24,67 +24,67 @@ export const loginUser = createAsyncThunk(
   }
 );
 export const registerUser = createAsyncThunk(
-    "auth/registerUser",
-    async (data, { rejectWithValue, fulfillWithValue }) => {
-      debugger
-      try {
-        const response = await Instance.post("/signup", data);
-        return fulfillWithValue(response);
-      } catch (error) {
-        return rejectWithValue(error.response);
-      }
+  "auth/registerUser",
+  async (data, { rejectWithValue, fulfillWithValue }) => {
+    debugger;
+    try {
+      const response = await Instance.post("/signup", data);
+      return fulfillWithValue(response);
+    } catch (error) {
+      return rejectWithValue(error.response);
     }
-  );
+  }
+);
 
-  export const allUsers = createAsyncThunk(
-    "auth/allUsers",
-    async (_, { rejectWithValue, fulfillWithValue }) => {
-      try {
-        const response = await Instance.get("/users");
-        return fulfillWithValue(response);
-      } catch (error) {
-        return rejectWithValue(error.response);
-      }
+export const allUsers = createAsyncThunk(
+  "auth/allUsers",
+  async (_, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const response = await Instance.get("/users");
+      return fulfillWithValue(response);
+    } catch (error) {
+      return rejectWithValue(error.response);
     }
-  );
+  }
+);
 
-  export const deleteAuthor = createAsyncThunk(
-    "auth/deleteAuthor",
-    async (id, { rejectWithValue, fulfillWithValue }) => {
-      try {
-        const response = await Instance.delete(`/users/${id}`);
-        return fulfillWithValue(response);
-      } catch (error) {
-        return rejectWithValue(error.response);
-      }
+export const deleteAuthor = createAsyncThunk(
+  "auth/deleteAuthor",
+  async (id, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const response = await Instance.delete(`/users/${id}`);
+      return fulfillWithValue(response);
+    } catch (error) {
+      return rejectWithValue(error.response);
     }
-  );
+  }
+);
 
-  export const signleAuthor = createAsyncThunk(
-    "auth/signleAuthor",
-    async (data, { rejectWithValue, fulfillWithValue }) => {
-      const { _id, ...object } = data;
-      try {
-        const response = await Instance.put(`/users/${_id}`,object);
-        return fulfillWithValue(response);
-      } catch (error) {
-        return rejectWithValue(error.response);
-      }
+export const signleAuthor = createAsyncThunk(
+  "auth/signleAuthor",
+  async (data, { rejectWithValue, fulfillWithValue }) => {
+    const { _id, ...object } = data;
+    try {
+      const response = await Instance.put(`/users/${_id}`, object);
+      return fulfillWithValue(response);
+    } catch (error) {
+      return rejectWithValue(error.response);
     }
-  );
+  }
+);
 
-  export const updateAuthor = createAsyncThunk(
-    "auth/updateAuthor",
-    async (data, { rejectWithValue, fulfillWithValue }) => {
-      const { _id, ...object } = data;
-      try {
-        const response = await Instance.put(`/users/${_id}`,object);
-        return fulfillWithValue(response);
-      } catch (error) {
-        return rejectWithValue(error.response);
-      }
+export const updateAuthor = createAsyncThunk(
+  "auth/updateAuthor",
+  async (data, { rejectWithValue, fulfillWithValue }) => {
+    const { _id, ...object } = data;
+    try {
+      const response = await Instance.put(`/users/${_id}`, object);
+      return fulfillWithValue(response);
+    } catch (error) {
+      return rejectWithValue(error.response);
     }
-  );
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -106,7 +106,12 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
-        localStorage.setItem("token",action.payload.data.token)
+        if (action.payload.data.role === "admin") {
+          localStorage.setItem("admin-token", action.payload.data.token);  
+        } else {
+          localStorage.setItem("token", action.payload.data.token); 
+        }
+        sessionStorage.setItem("email",action.payload.data.email)
         state.loginData = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {
@@ -173,4 +178,3 @@ const authSlice = createSlice({
 
 export const { resetResp } = authSlice.actions;
 export default authSlice.reducer;
-

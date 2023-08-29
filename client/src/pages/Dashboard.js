@@ -23,19 +23,19 @@ const DashBoard = () => {
         </div>
         <div className="dash_card_wr d-flex">
           <div className="dash_card">
-            <p>Users</p>
+            <h5>Users</h5>
             <p>{allUser?.data?.data?.length || 0}</p>
           </div>
           <div className="dash_card">
-            <p>Authors</p>
+            <h5>Authors</h5>
             <p>122</p>
           </div>
           <div className="dash_card">
-            <p>Publish Book</p>
+            <h5>Publish Book</h5>
             <p>{allBook?.data?.data?.length}</p>
           </div>
           <div className="dash_card">
-            <p>Ohters</p>
+            <h5>Ohters</h5>
             <p>1200</p>
           </div>
         </div>

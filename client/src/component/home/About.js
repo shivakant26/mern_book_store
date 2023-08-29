@@ -3,7 +3,7 @@ const About = ({id}) => {
     <>
       <div className="about_store_section" id={id}>
         <div className="center_wr">
-          <div className="about_book">
+          <div className="about_book d-flex">
             <div className="right_sec">
               <img
                 src={require("../../assets/images/about-img.png")}

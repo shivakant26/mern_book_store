@@ -6,6 +6,7 @@ const initialState = {
   del_book : [],
   newBook : [],
   updateBookData : [],
+  singleBookData : null,
   loading: false,
   error: null,
 };
@@ -58,6 +59,18 @@ const initialState = {
     }
   );
 
+  export const singleBook = createAsyncThunk(
+    "book/singleBook",
+    async (id, { rejectWithValue, fulfillWithValue }) => {
+      try {
+        const response = await Instance.get(`/book/${id}`);
+        return fulfillWithValue(response);
+      } catch (error) {
+        return rejectWithValue(error.response);
+      }
+    }
+  );
+
 const bookSlice = createSlice({
   name: "book",
   initialState: initialState,
@@ -66,6 +79,7 @@ const bookSlice = createSlice({
       state.getallBook = [];
       state.del_book = [];
       state.newBook = [];
+      state.singleBookData = null;
       state.updateBookData = [];
       state.error = null;
     },
@@ -113,6 +127,17 @@ const bookSlice = createSlice({
         state.updateBookData = action.payload;
       })
       .addCase(updateBook.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(singleBook.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(singleBook.fulfilled, (state, action) => {
+        state.loading = false;
+        state.singleBookData = action.payload;
+      })
+      .addCase(singleBook.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

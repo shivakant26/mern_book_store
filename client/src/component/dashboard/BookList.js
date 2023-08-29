@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteBook, getallBook, resetBookApi } from "../../redux/bookSlice";
 import Swal from "sweetalert2";
 import { Table } from "react-bootstrap";
+import { baseUrl } from "../../api/apiConstant";
 
 const BookList = () => {
   const navigate = useNavigate();
@@ -28,16 +29,29 @@ const BookList = () => {
   }, [del_book]);
 
   const trashBook = (id) => {
-    dispatch(deleteBook(id));
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showCancelButton: true,
+      confirmButtonText: 'okay',
+    }).then((result) => {
+      if (result.isConfirmed) {
+          dispatch(deleteBook(id));
+      } 
+    })
   };
 
-  const editBook = (book) =>{
+  const editBook = (book) => {
     navigate(`/add-book/${book._id}`, {
       state: {
         book,
       },
     });
-  }
+  };
+
+  const viewBook = (id) => {
+    navigate(`/book/${id}`);
+  };
+
   return (
     <>
       <div className="dash_heading d-flex">
@@ -69,18 +83,23 @@ const BookList = () => {
                     <tr>
                       <td className="center-align">{index + 1}</td>
                       <td className="center-align">{book.bookName}</td>
-                      <td className="center-align">{book.description}</td>
+                      <td className="center-align" title={book.description}>
+                        {book.description}
+                      </td>
                       <td>
                         <img
-                          src={"http://localhost:8100/" + book.coverImgUrl}
+                          src={baseUrl + book.coverImgUrl}
                           height="80px"
                           width="60px"
                           alt="image"
                         />
                       </td>
-                      <td className="center-align" >Yes</td>
+                      <td className="center-align">Yes</td>
                       <td className="d-flex td_gap">
-                        <span className="edit_btn" onClick={()=>editBook(book)}>
+                        <span
+                          className="edit_btn"
+                          onClick={() => editBook(book)}
+                        >
                           <FaEdit />
                         </span>
                         <span
@@ -89,7 +108,12 @@ const BookList = () => {
                         >
                           <FaTrash />
                         </span>
-                        <span className="view_btn">
+                        <span
+                          className="view_btn"
+                          onClick={() => {
+                            viewBook(book._id);
+                          }}
+                        >
                           <FaEye />
                         </span>
                       </td>
@@ -100,7 +124,7 @@ const BookList = () => {
             ) : (
               <>
                 <tr>
-                  <td>Book Not Found !</td>
+                  <td colSpan={6} style={{color:"tomato"}}>Book Not Found !</td>
                 </tr>
               </>
             )}

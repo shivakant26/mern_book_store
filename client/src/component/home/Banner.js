@@ -4,7 +4,7 @@ const Banner = () => {
     <>
       <div className="banner_section">
         <div className="center_wr">
-          <div className="banner_inner">
+          <div className="banner_inner d-flex">
             <div className="right_sec bx-content">
               <h1>Buy and sell your textbooks for the best price</h1>
               <p>

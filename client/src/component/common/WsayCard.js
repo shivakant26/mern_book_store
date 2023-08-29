@@ -13,7 +13,7 @@ const WhatSayCard = () => {
                   <FaQuoteLeft />
                 </span>
               </div>
-              <div className="profile">
+              <div className="profile d-flex">
                 <div className="profile_image">
                   <img src={wCard.profileImage} alt={wCard.alt} />
                 </div>

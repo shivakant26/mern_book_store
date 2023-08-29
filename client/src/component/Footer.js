@@ -19,7 +19,7 @@ const Footer = () => {
     <>
       <div className="footer_section">
         <div className="center_wr">
-          <div className="footer">
+          <div className="footer d-flex">
             <div className="about_us_col c-width">
               <h5>About Us</h5>
               <p>
@@ -92,7 +92,7 @@ const Footer = () => {
       </div>
       <div className="copyright_section">
         <div className="center_wr">
-          <p>© 2023 All Rights Reserved By Free Html Templates</p>
+          <p>© 2023 All Rights Reserved By Admin</p>
         </div>
       </div>
     </>

@@ -5,7 +5,6 @@ const SingleUser = () => {
   const id = useParams();
   const location = useLocation();
   const receivedItem = location.state.item;
-  console.log(12121212121, receivedItem);
   return (
     <>
       <div className="dash_heading d-flex">

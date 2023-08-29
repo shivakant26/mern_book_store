@@ -1,33 +1,32 @@
-const Author = require("../model/author.model");
-const bcrypt = require("bcrypt");
-var jwt = require("jsonwebtoken");
+const Users = require("../model/user.model");
 const { comparePassword, hashPassword } = require("../helper/becrypt");
 const { signToken } = require("../helper/token");
 
 const signUp = async (req, res) => {
-  const { fullName, email, password, gender } = req.body;
+  const { fullName, email, password, gender , role } = req.body;
   try {
     if (!fullName || !email || !password || !gender) {
       res.status(404).json({
         message: "all field Required!",
       });
     } else {
-      const userExits = await Author.findOne({ email: req.body.email });
+      const userExits = await Users.findOne({ email: req.body.email });
       if (userExits) {
         return res.status(400).json({
           message: "you are allready registerd",
         });
       }
       const hasedPassword = await hashPassword(password, 10);
-      const author = await Author.create({
+      const users = await Users.create({
         fullName: fullName,
         email:email,
         password: hasedPassword,
         gender: gender,
+        role:role
       });
       res.status(200).json({
-        data: author,
-        message: "Author Registerd !",
+        data: users,
+        message: "Users Registerd !",
       });
     }
   } catch (error) {}
@@ -41,18 +40,20 @@ const singIn = async (req, res) => {
         message: "please fill all fields",
       });
     } else {
-      const author = await Author.findOne({
+      const users = await Users.findOne({
         email: req.body.email,
       });
-      if (!author) {
+      if (!users) {
         return res.status(400).json({
           message: "you are not Registerd",
         });
       }
-      const isMatch = await comparePassword(req.body.password, author.password);
+      const isMatch = await comparePassword(req.body.password, users.password);
       if (isMatch) {
-        var token = signToken(author._id);
+        var token = signToken(users._id);
         return res.status(200).json({
+          role:users.role,
+          email:users.email,
           message: "login succussfully",
           token: token,
         });
@@ -71,7 +72,7 @@ const singIn = async (req, res) => {
 
 const allUser = async (req, res) => {
   try {
-    const users = await Author.find();
+    const users = await Users.find();
     if (users) {
       res.status(200).json({
         data: users,
@@ -89,15 +90,14 @@ const allUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const authors = await Author.findByIdAndDelete({ _id: req.params._id });
-    if (!authors) {
+    const users = await Users.findByIdAndDelete({ _id: req.params._id });
+    if (!users) {
       res.status(400).json({
-        data: book,
-        message: "currently No Book here...",
+        message: "currently No User here...",
       });
     } else {
       res.status(200).json({
-        message: "Delete Author Succussfully",
+        message: "Delete User Succussfully",
       });
     }
   } catch (error) {
@@ -107,15 +107,15 @@ const deleteUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const authors = await Author.findByIdAndUpdate(req.params._id,req.body,{new:true})
-    if(authors === null){
+    const users = await Users.findByIdAndUpdate(req.params._id,req.body,{new:true})
+    if(users === null){
       res.status(400).json({
         message:'No Record Found !'
       })
     }else{
       res.status(200).json({
-        data:authors,
-        message:"Author Update Succussfully"
+        data:users,
+        message:"User Update Succussfully"
       })
     }
   } catch (error) {
@@ -127,10 +127,10 @@ const updateUser = async (req, res) => {
 
 const singleUser = async(req,res)=>{
   try {     
-      const author = await Author.find({_id:req.params._id});
-      if(author){
+      const users = await Users.find({_id:req.params._id});
+      if(users){
           res.status(200).json({
-              data:author,
+              data:users,
               message:"fetch single User succussfully"
           })
       }else{

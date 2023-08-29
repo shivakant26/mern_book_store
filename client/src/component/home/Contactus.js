@@ -16,7 +16,7 @@ const ContactUs = ({ id }) => {
     <>
       <div className="contact_us_section layout_padding" id={id}>
         <div className="center_wr">
-          <div className="constact_us">
+          <div className="constact_us d-flex">
             <div className="constact_us_form">
               <div className="section_heading">
                 <h3>Contact Us</h3>

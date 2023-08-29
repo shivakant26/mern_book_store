@@ -6,7 +6,7 @@ const Blog = ({id}) => {
           <div className="section_heading">
             <h3>From Our Blog</h3>
           </div>
-          <div className="blog_crd_group">
+          <div className="blog_crd_group d-flex">
             <div className="blog_card">
               <div className="blog_card_image">
                 <img

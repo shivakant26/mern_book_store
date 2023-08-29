@@ -6,12 +6,21 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Link, useLocation } from "react-router-dom";
 
-const SideBar = ({dShow , setDShow}) => {
+const SideBar = ({ dShow, setDShow, userToken }) => {
   const location = useLocation();
-  console.log(location.pathname)
   return (
     <>
-      <div className={dShow ? "sidebar_short" : "sidebar"}>
+      <div
+        className={
+          dShow && userToken !== null
+            ? "sidebar_short user_si"
+            : userToken !== null
+            ? "sidebar user_si"
+            : dShow
+            ? "sidebar_short"
+            : "sidebar"
+        }
+      >
         <div className="dwayer">
           <span onClick={() => setDShow(!dShow)}>
             <GiHamburgerMenu />
@@ -23,11 +32,13 @@ const SideBar = ({dShow , setDShow}) => {
               src={require("../../assets/images/profile.jpg")}
               alt="user_image"
             />
-            <p>jhondoe@gmail.com</p>
+            <p>{sessionStorage.getItem("email")}</p>
           </div>
           <div className={dShow ? "drawyer_dash_menu" : "dash_menu"}>
             <ul>
-              <li className={location.pathname === "/dashboard" ? "active" :""}>
+              <li
+                className={location.pathname === "/dashboard" ? "active" : ""}
+              >
                 <span>
                   {dShow ? (
                     <Link to="/dashboard">
@@ -41,7 +52,7 @@ const SideBar = ({dShow , setDShow}) => {
                   <Link to="/dashboard">Dashboard</Link>
                 </span>
               </li>
-              <li className={location.pathname === "/profile" ? "active" :""}>
+              <li className={location.pathname === "/profile" ? "active" : ""}>
                 <span>
                   {dShow ? (
                     <Link to="/profile">
@@ -55,7 +66,7 @@ const SideBar = ({dShow , setDShow}) => {
                   <Link to="/profile">Profile</Link>
                 </span>
               </li>
-              <li className={location.pathname === "/add-book" ? "active" :""}>
+              <li className={location.pathname === "/add-book" ? "active" : ""}>
                 <span>
                   {dShow ? (
                     <Link to="/add-book">
@@ -69,7 +80,9 @@ const SideBar = ({dShow , setDShow}) => {
                   <Link to="/add-book">Add Book</Link>
                 </span>
               </li>
-              <li className={location.pathname === "/book-list" ? "active" :""}>
+              <li
+                className={location.pathname === "/book-list" ? "active" : ""}
+              >
                 <span>
                   {dShow ? (
                     <Link to="/book-list">
@@ -83,22 +96,29 @@ const SideBar = ({dShow , setDShow}) => {
                   <Link to="/book-list">Books</Link>
                 </span>
               </li>
-              <li className={location.pathname === "/user-list" ? "active" :""}>
-                <span>
-                  {dShow ? (
-                    <Link to="/user-list">
-                      {" "}
+              {userToken !== null ? (
+                ""
+              ) : (
+                <li
+                  className={location.pathname === "/user-list" ? "active" : ""}
+                >
+                  <span>
+                    {dShow ? (
+                      <Link to="/user-list">
+                        {" "}
+                        <BiSolidUser />
+                      </Link>
+                    ) : (
                       <BiSolidUser />
-                    </Link>
-                  ) : (
-                    <BiSolidUser />
-                  )}
-                </span>
-                <span>
-                  <Link to="/user-list">Users</Link>
-                </span>
-              </li>
-              <li className={location.pathname === "/logout" ? "active" :""}>
+                    )}
+                  </span>
+                  <span>
+                    <Link to="/user-list">Users</Link>
+                  </span>
+                </li>
+              )}
+
+              <li className={location.pathname === "/logout" ? "active" : ""}>
                 <span>
                   {dShow ? (
                     <Link to="/logout">
