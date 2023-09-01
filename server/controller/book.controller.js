@@ -27,6 +27,7 @@ const createBook = async(req, res) =>{
 
 const allBook = async(req,res)=>{
     try {      
+        // const book = await Book.find().populate("authorName",{fullName:1,_id:0});
         const book = await Book.find();
         if(book){
             res.status(200).json({
@@ -47,7 +48,7 @@ const allBook = async(req,res)=>{
 
 const singleBook = async(req,res)=>{
     try {     
-        const book = await Book.find({_id:req.params._id}).populate("authorName",{fullName:1,_id:0});
+        const book = await Book.find({_id:req.params._id})
         if(book){
             res.status(200).json({
                 data:book,

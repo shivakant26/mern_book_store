@@ -1,6 +1,8 @@
 import { lazy } from 'react';
 import SingleUser from '../component/dashboard/SingleUser';
 import SingleBook from '../component/dashboard/SingleBook';
+import SingleProduct from '../component/SingleProduct';
+import AddToCart from '../component/AddCart';
 const Logout = lazy(()=> import('../component/Logout'));
 const HomePage = lazy(() => import('../pages/index'));
 const Login = lazy(() => import('../component/Login'));
@@ -24,7 +26,16 @@ export const publicRouteArray = [
     {
         path:"/register",
         component:<Register />
-    }
+    },
+    {
+        path:"/single-product/:id",
+        component:<SingleProduct />
+    },
+    {
+        path:"/add-to-cart",
+        component:<AddToCart />
+    },
+
 ]
 
 

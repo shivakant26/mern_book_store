@@ -30,7 +30,7 @@ const AddBook = () => {
     if (editableId) {
       setValue("bookName", editBookData.bookName);
       setValue("price", editBookData.price);
-      // setValue("authorName", editBookData.authorName);
+      setValue("authorName", editBookData.authorName);
       setValue("description", editBookData.description);
       setValue("coverImgUrl", `${baseUrl}+${editBookData.coverImgUrl}`);
       setSelectedImage(`${baseUrl}${editBookData.coverImgUrl}`);
@@ -68,7 +68,7 @@ const AddBook = () => {
     let formData = new FormData();
     formData.append("bookName", data.bookName);
     formData.append("price", data.price);
-    // formData.append("authorName", data.authorName);
+    formData.append("authorName", data.authorName);
     formData.append("description", data.description);
     formData.append("coverImgUrl", file);
     if (editableId) {
@@ -113,7 +113,7 @@ const AddBook = () => {
                     error={errors.price}
                   />
                 </div>
-                {/* <div className="form_field">
+                <div className="form_field">
                   <InputField
                     id="authorName"
                     type="text"
@@ -123,7 +123,7 @@ const AddBook = () => {
                     })}
                     error={errors.authorName}
                   />
-                </div> */}
+                </div>
                 <div className="form_field">
                   <InputField
                     id="description"

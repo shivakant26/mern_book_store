@@ -25,7 +25,7 @@ const SingleBook = () => {
       <div className="single_bk_tag d-flex">
         <div className="sgbk d-flex">
           <span><FaUserCircle/></span>
-          <span>{singleBookData?.data?.data[0]?.authorName?.fullName}</span>
+          <span>{singleBookData?.data?.data[0]?.authorName}</span>
         </div>
         <div className="sgbk d-flex">
           <span><FaCalendarAlt/></span>

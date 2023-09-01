@@ -72,6 +72,15 @@ code {
 .section_heading h3 {
   font-size: 32px;
 }
+.w-48{
+  width: 48%;
+}
+.w-31{
+  width: 31%;
+}
+.w-100{
+  width: 100%;
+}
 /* header */
 
 .bk_header {
@@ -112,6 +121,30 @@ code {
 }
 .site_menu ul li a:hover {
   color: #44b89d;
+}
+.site_menu ul li span.users {
+  color: #fff;
+  background: #44b897;
+  display: flex;
+  height: 40px;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-weight: 600;
+  cursor:pointer
+}
+.current_users{
+  position: relative;
+}
+.user_submenus{
+  position: absolute;
+  background: #fff;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  top: 48px;
+}
+.user_submenus ul li a{
+  color: #000 !important;
 }
 input[type="search"] {
   border-radius: 45px;
@@ -235,6 +268,7 @@ input[type="search"]:focus {
   border: 1px solid #dfdbdb;
   margin: 10px;
   padding: 6px;
+  cursor: pointer;
   position: relative;
 }
 .page_image {
@@ -256,10 +290,14 @@ input[type="search"]:focus {
   justify-content: space-between;
   padding: 10px 8px;
 }
+.book_details{
+  width: 65%;
+}
 .book_details h5 {
   margin: 0;
   font-family: "robotobold";
   font-size: 16px;
+  text-align: left;
 }
 .book_details p {
   margin: 0;

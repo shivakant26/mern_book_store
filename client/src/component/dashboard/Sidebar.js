@@ -6,21 +6,11 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 import { Link, useLocation } from "react-router-dom";
 
-const SideBar = ({ dShow, setDShow, userToken }) => {
+const SideBar = ({ dShow, setDShow }) => {
   const location = useLocation();
   return (
     <>
-      <div
-        className={
-          dShow && userToken !== null
-            ? "sidebar_short user_si"
-            : userToken !== null
-            ? "sidebar user_si"
-            : dShow
-            ? "sidebar_short"
-            : "sidebar"
-        }
-      >
+      <div className={dShow ? "sidebar_short" : "sidebar"}>
         <div className="dwayer">
           <span onClick={() => setDShow(!dShow)}>
             <GiHamburgerMenu />
@@ -96,27 +86,23 @@ const SideBar = ({ dShow, setDShow, userToken }) => {
                   <Link to="/book-list">Books</Link>
                 </span>
               </li>
-              {userToken !== null ? (
-                ""
-              ) : (
-                <li
-                  className={location.pathname === "/user-list" ? "active" : ""}
-                >
-                  <span>
-                    {dShow ? (
-                      <Link to="/user-list">
-                        {" "}
-                        <BiSolidUser />
-                      </Link>
-                    ) : (
+              <li
+                className={location.pathname === "/user-list" ? "active" : ""}
+              >
+                <span>
+                  {dShow ? (
+                    <Link to="/user-list">
+                      {" "}
                       <BiSolidUser />
-                    )}
-                  </span>
-                  <span>
-                    <Link to="/user-list">Users</Link>
-                  </span>
-                </li>
-              )}
+                    </Link>
+                  ) : (
+                    <BiSolidUser />
+                  )}
+                </span>
+                <span>
+                  <Link to="/user-list">Users</Link>
+                </span>
+              </li>
 
               <li className={location.pathname === "/logout" ? "active" : ""}>
                 <span>

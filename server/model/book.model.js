@@ -4,9 +4,12 @@ const bookSchema = mongoose.Schema({
     bookName:{
         type:String
     },
+    // authorName:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref : "user"
+    // },
     authorName:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref : "user"
+        type:String
     },
     price:{
         type:Number

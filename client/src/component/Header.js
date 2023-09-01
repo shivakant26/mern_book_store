@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setOpen] = useState(false);
+  const token = localStorage.getItem("token")
   return (
     <>
       <div className="bk_header">
@@ -15,7 +16,7 @@ const Header = () => {
               </Link>
             </div>
             <div className="site_menu">
-              <Menu />
+              <Menu userAuth={token}/>
             </div>
             <div className="mobile_menu">
               <button
@@ -23,7 +24,7 @@ const Header = () => {
                 className={`hamburger-button ${isOpen ? "open" : "close"}`}
               />
               <div className={`panel ${isOpen ? "open" : "close"}`}>
-                <Menu />
+                <Menu userAuth={token}/>
               </div>
             </div>
           </div>
