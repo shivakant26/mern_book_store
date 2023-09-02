@@ -1,8 +1,8 @@
 import { lazy } from 'react';
-import SingleUser from '../component/dashboard/SingleUser';
-import SingleBook from '../component/dashboard/SingleBook';
-import SingleProduct from '../component/SingleProduct';
-import AddToCart from '../component/AddCart';
+const SingleUser = lazy(()=> import('../component/dashboard/SingleUser'));
+const SingleBook = lazy(()=> import('../component/dashboard/SingleBook'));
+const SingleProduct =  lazy(()=> import('../component/SingleProduct'));
+const AddToCart = lazy(()=> import('../component/AddCart'));
 const Logout = lazy(()=> import('../component/Logout'));
 const HomePage = lazy(() => import('../pages/index'));
 const Login = lazy(() => import('../component/Login'));

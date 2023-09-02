@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Qunatity from "./common/Quntity";
 import { useForm } from "react-hook-form";
 import InputField from "./common/InputField";
+import { useNavigate } from "react-router-dom";
 
 const AddToCart = () => {
   const {
@@ -11,19 +12,32 @@ const AddToCart = () => {
     formState: { errors },
     register,
     reset,
+    setValue,
   } = useForm();
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [count, setCount] = useState(1);
   const [showCoup, setShowCoup] = useState(false);
   const [acco, setAcco] = useState(2);
+  const token = localStorage.getItem("token");
+
   const proceedCheckout = () => {
-    setStep(2);
+    if (!token) {
+      navigate("/login");
+    } else {
+      setStep(2);
+    }
   };
 
   const onSubmit = (data) => {
     console.log(data);
-    reset();
+    setStep(3);
+    // reset();
   };
+
+  useEffect(() => {
+    setValue("payment", "cash");
+  }, []);
 
   const handleChange = (e) => {
     if (e.target.value === "cash") {
@@ -32,6 +46,7 @@ const AddToCart = () => {
       setAcco(1);
     }
   };
+
   return (
     <>
       <div className="cart_section">
@@ -43,23 +58,40 @@ const AddToCart = () => {
                 className={step === 1 ? "step d-flex active" : "step d-flex"}
                 onClick={() => setStep(1)}
               >
-                <span className="step_num">{1}</span>
+                <span className={step === 1 ? "step_num active" : "step_num"}>
+                  {1}
+                </span>
                 <span className="step_text">Shopping Cart</span>
               </div>
-              <div
-                className={step === 2 ? "step d-flex active" : "step d-flex"}
-                onClick={() => setStep(2)}
-              >
-                <span className="step_num">{2}</span>
-                <span className="step_text">Checkout Details</span>
-              </div>
-              <div
-                className={step === 3 ? "step d-flex active" : "step d-flex"}
-                onClick={() => setStep(3)}
-              >
-                <span className="step_num">{3}</span>
-                <span className="step_text">Order Complete</span>
-              </div>
+              {token && (
+                <>
+                  <div
+                    className={
+                      step === 2 ? "step d-flex active" : "step d-flex"
+                    }
+                  >
+                    <span
+                      className={step === 2 ? "step_num active" : "step_num"}
+                    >
+                      {2}
+                    </span>
+                    <span className="step_text">Checkout Details</span>
+                  </div>
+                  <div
+                    className={
+                      step === 3 ? "step d-flex active" : "step d-flex"
+                    }
+                    onClick={() => setStep(3)}
+                  >
+                    <span
+                      className={step === 3 ? "step_num active" : "step_num"}
+                    >
+                      {3}
+                    </span>
+                    <span className="step_text">Order Complete</span>
+                  </div>
+                </>
+              )}
             </div>
             {step === 1 ? (
               <>
@@ -101,7 +133,7 @@ const AddToCart = () => {
                   </div>
                   <div className="checkout_total">
                     <h5>Cart Total</h5>
-                    <Table className="shop_table">
+                    <Table className="shop_table" style={{ overflowX: "auto" }}>
                       <tbody>
                         <tr>
                           <th>Subtotal</th>
@@ -119,7 +151,7 @@ const AddToCart = () => {
                             className="cart_btn"
                             onClick={proceedCheckout}
                           >
-                            Proceed to checkout
+                            Proceed to buy
                           </button>
                         </div>
                       </tfoot>
@@ -133,7 +165,9 @@ const AddToCart = () => {
                   <div className="customer_information">
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="customer_info">
-                        <h5>Customer information</h5>
+                        <h5 className="tx-left tx-upper mb-20">
+                          Customer information
+                        </h5>
                         <div className="form_field">
                           <InputField
                             id="email"
@@ -152,7 +186,9 @@ const AddToCart = () => {
                         </div>
                       </div>
                       <div className="billings">
-                        <h5>billing details</h5>
+                        <h5 className="tx-left tx-upper mb-20">
+                          billing details
+                        </h5>
                         <div className="billig_row d-flex">
                           <div className="form_field w-48">
                             <InputField
@@ -189,7 +225,12 @@ const AddToCart = () => {
                           />
                         </div>
                         <div className="form_field">
-                          <select className="w-100">
+                          <select
+                            className="w-100"
+                            {...register("countryName", {
+                              required: "contryName is required *",
+                            })}
+                          >
                             <option value="india">India</option>
                             <option value="Usa">Usa</option>
                             <option value="shriLanka">shriLanka</option>
@@ -256,7 +297,9 @@ const AddToCart = () => {
                           </div>
                         </div>
                         <div className="additional_info">
-                          <h5>Additional information</h5>
+                          <h5 className="tx-left tx-upper mb-20">
+                            Additional information
+                          </h5>
                           <div className="form_field">
                             <InputField
                               id="phone"
@@ -288,7 +331,7 @@ const AddToCart = () => {
                           </p>
                         </div>
                         <div className="form_field payment_option">
-                          <h5>Payment</h5>
+                          <h5 className="tx-left tx-upper mb-20">Payment</h5>
                           <div className="accordian">
                             <div className="accor d-flex">
                               <div>
@@ -296,6 +339,9 @@ const AddToCart = () => {
                                   type="radio"
                                   name="payment"
                                   value="transfer"
+                                  {...register("payment", {
+                                    required: "firstName is required *",
+                                  })}
                                   onChange={(e) => handleChange(e)}
                                 />
                               </div>
@@ -317,6 +363,9 @@ const AddToCart = () => {
                                   type="radio"
                                   name="payment"
                                   value="cash"
+                                  {...register("payment", {
+                                    required: "firstName is required *",
+                                  })}
                                   onChange={(e) => handleChange(e)}
                                 />
                               </div>
@@ -330,19 +379,113 @@ const AddToCart = () => {
                           </div>
                         </div>
                         <div className="form_field">
-                          <button className="cart_btn w-100">
-                            Place order{" "}
+                          <button className="cart_btn w-100" type="submit">
+                            Place order
                           </button>
                         </div>
                       </div>
                     </form>
                   </div>
-                  <div className="orders"></div>
+                  <div className="orders">
+                    <h5 className="tx-left tx-upper mb-20">Your Order</h5>
+                    <Table style={{ overflowX: "auto" }}>
+                      <thead>
+                        <tr>
+                          <th className="tx-left lt-gray pd-8">Product</th>
+                          <th className="tx-right lt-gray pd-8">Subtotal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="tx-left lt-gray pd-8">
+                            Product Name 10 x 1
+                          </td>
+                          <td className="tx-right lt-gray pd-8">₹ 125.00</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th className="tx-left lt-gray pd-8">Subtotal</th>
+                          <td className="tx-right lt-gray pd-8">₹ 125.00</td>
+                        </tr>
+                        <tr>
+                          <th className="tx-left pd-8">Total</th>
+                          <td className="tx-right pd-8">₹ 125.00</td>
+                        </tr>
+                      </tfoot>
+                    </Table>
+                  </div>
                 </div>
               </>
             ) : (
               <>
-                <div className="three">three</div>
+                <div className="order_complete">
+                  <div className="woo_success">
+                    <h4>Thank you. Your order has been received.</h4>
+                  </div>
+                  <div className="order_summery d-flex">
+                    <div className="woo_pay">
+                      <p>Order number:</p>
+                      <h6>856</h6>
+                    </div>
+                    <div className="woo_pay">
+                      <p>Date:</p>
+                      <h6>September 1, 2023</h6>
+                    </div>
+                    <div className="woo_pay">
+                      <p>Total:</p>
+                      <h6>$1,700.00</h6>
+                    </div>
+                    <div className="woo_pay">
+                      <p>Payment method:</p>
+                      <h6>Cash on delivery</h6>
+                    </div>
+                  </div>
+                  <div className="woo_order_details">
+                    <p className="tx-left lt-gray">
+                      Pay with cash upon delivery.
+                    </p>
+                    <h5 className="tx-left tx-upper mb-20">order details</h5>
+                    <Table style={{ overflowX: "auto" }}>
+                      <thead>
+                        <tr>
+                          <th className="tx-left lt-gray pd-8">Product</th>
+                          <th className="tx-right lt-gray pd-8">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className="tx-left lt-gray pd-8">
+                            Product Name 10 x 1
+                          </td>
+                          <td className="tx-right lt-gray pd-8">₹ 125.00</td>
+                        </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th className="tx-left lt-gray pd-8">Subtotal</th>
+                          <td className="tx-right lt-gray pd-8">₹ 125.00</td>
+                        </tr>
+                        <tr>
+                          <th className="tx-left lt-gray pd-8">
+                            Payment Method
+                          </th>
+                          <td className="tx-right lt-gray pd-8">
+                            Cash on delivery
+                          </td>
+                        </tr>
+                        <tr>
+                          <th className="tx-left pd-8">Total</th>
+                          <td className="tx-right pd-8">₹ 125.00</td>
+                        </tr>
+                        <tr>
+                          <th className="tx-left pd-8">Note:</th>
+                          <td className="tx-right pd-8">sdflkdsj</td>
+                        </tr>
+                      </tfoot>
+                    </Table>
+                  </div>
+                </div>
               </>
             )}
           </div>

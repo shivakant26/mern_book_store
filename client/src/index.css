@@ -82,7 +82,12 @@ code {
   width: 100%;
 }
 /* header */
-
+.sticky {
+  position: fixed;
+  z-index: 12;
+  top: 0;
+  width: 100%;
+}
 .bk_header {
   background-color: #063547;
 }
@@ -122,7 +127,7 @@ code {
 .site_menu ul li a:hover {
   color: #44b89d;
 }
-.site_menu ul li span.users {
+.site_menu ul li span.users ,.mobile_menu ul li span.users {
   color: #fff;
   background: #44b897;
   display: flex;
@@ -142,6 +147,7 @@ code {
   background: #fff;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
   top: 48px;
+  z-index: 9;
 }
 .user_submenus ul li a{
   color: #000 !important;
@@ -611,7 +617,7 @@ input[type="email"] {
 .login_page img {
   width: 100%;
 }
-.login_form {
+.login_form,.send_otp,.password_reset{
   width: 300px;
   margin: auto;
 }
@@ -645,6 +651,12 @@ input[type="email"] {
   .bx-content h1 {
     padding: 0px 120px 0px 0px;
   }
+  .product_details,.checkout_total,.customer_information,.orders{
+    width: 100% !important;
+}
+.customer_address{
+  flex-direction: column-reverse;
+}
 }
 
 @media only screen and (max-width: 979px) {
@@ -731,6 +743,10 @@ input[type="email"] {
     width: 93% !important;
     margin-bottom: 18px !important;
   }
+  .woo_pay {
+    width: 35% !important;
+    margin-bottom: 15px;
+}
 }
 
 @media only screen and (max-width: 479px) {
@@ -767,4 +783,15 @@ input[type="email"] {
   .cards {
     width: 85%;
   }
+  .steppers {
+    gap: 25px;
+    flex-direction: column;
+    align-content: center;
+}
+}
+
+@media screen and (max-width: 420px){
+  .woo_pay {
+    width: 70% !important;
+}
 }

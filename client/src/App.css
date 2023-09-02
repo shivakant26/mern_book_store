@@ -3,7 +3,7 @@
 }
 .d-flex {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap !important;
 }
 .radio_gap {
   gap: 15px;
@@ -348,7 +348,8 @@ li.active span {
 }
 .step span.step_num {
   margin-right: 8px;
-  background-color: #44b89d;
+  /* background-color: #44b89d; */
+  background-color: gray;
   height: 30px;
   width: 30px;
   display: inline-block;
@@ -361,6 +362,9 @@ li.active span {
 .step span.step_text {
   font-size: 20px;
   text-transform: uppercase;
+}
+span.step_num.active{
+  background-color: #44b89d;
 }
 .step.d-flex.active {
   color: #44b89d;
@@ -430,6 +434,44 @@ li.active span {
 }
 .panels{
   background: #cbeed3;
+  transition: .4s;
   padding: 10px 20px;
-
+}
+.order_summery{
+  justify-content: center;
+  padding: 20px 0px;
+  background: #e2ebe8;
+  margin-bottom: 40px;
+}
+.woo_success{
+  padding: 40px 0px;
+}
+.woo_pay{
+  width: 20%;
+  text-align: left;
+}
+.woo_pay p{
+  margin: 0;
+}
+.pd-8{
+  padding: 14px !important;
+}
+.lt-gray{
+  color: #878787 !important;
+}
+.mb-20{
+  margin-bottom: 20px;
+}
+.tx-left{
+  text-align: left;
+}
+.tx-upper{
+  text-transform: uppercase;
+}
+.tx-right{
+  text-align: right;
+}
+.forgot_pwd{
+  cursor: pointer;
+  color: blue;
 }

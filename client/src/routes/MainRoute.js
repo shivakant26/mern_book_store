@@ -2,6 +2,7 @@ import Layout from "../component/layout";
 import React, { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ProtectdRouteArray, publicRouteArray } from "../utils/RouteConstent";
+import PageNotFound from "../pages/404";
 const DashBoardLayout = lazy(() => import("../component/layout/DashLayout"));
 const PublicRoutes = lazy(() => import("./PublicRoute"));
 const ProtectedRoutes = lazy(() => import("./ProtectedRoute"));
@@ -40,6 +41,7 @@ const MainRoute = () => {
             );
           })}
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Suspense>
   );

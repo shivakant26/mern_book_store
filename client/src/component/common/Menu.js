@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link as ScrollLink } from "react-scroll";
-import { Link, Link as RouteLink, useNavigate } from "react-router-dom"; // Import the RouteLink
+import { Link, Link as RouteLink } from "react-router-dom";
 import { MenuLinkData } from "../../utils/constent";
 
 const Menu = ({ userAuth }) => {
-  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
-  const userLogout = () =>{
+  const userLogout = () => {
     localStorage.removeItem("token");
-    setTimeout(()=>{
-      window.location.href = "/"
-    },1000)
-  }
+    window.location.href = "/login"
+  };
 
   return (
     <>

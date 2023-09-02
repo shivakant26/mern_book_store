@@ -7,7 +7,7 @@ import ContactUs from "../component/home/Contactus";
 import Banner from "../component/home/Banner";
 import { Link } from "react-router-dom";
 import BestBookSeller from "../component/home/BestBookSeller";
-
+import Fade from "react-reveal/Fade"; 
 const HomePage = () => {
   return (
     <>
@@ -16,15 +16,30 @@ const HomePage = () => {
           Login
         </Link>
       </div>
-      <Banner />
-      <BookCategory id="category" />
-      <About id="about" />
-      <BestBookSeller />
-      <WhatSay />
-      <Blog id="blog" />
-      <ContactUs id="contactus" />
+      <Fade bottom>
+        <Banner />
+      </Fade>
+      <Fade bottom>
+        <BookCategory id="category" />
+      </Fade>
+      <Fade bottom>
+        <About id="about" />
+      </Fade>
+      <Fade bottom>
+        <BestBookSeller />
+      </Fade>
+      <Fade bottom>
+        <WhatSay />
+      </Fade>
+      <Fade bottom>
+        <Blog id="blog" />
+      </Fade>
+      <Fade bottom>
+        <ContactUs id="contactus" />
+      </Fade>
     </>
   );
 };
 
 export default HomePage;
+

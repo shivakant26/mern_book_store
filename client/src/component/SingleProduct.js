@@ -12,19 +12,15 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { singleBookData } = useSelector((state) => state?.book);
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     dispatch(singleBook(id));
   }, [dispatch]);
 
   const addtoCart = () => {
-    if (!token) {
-      navigate("/login");
-    } else {
       navigate("/add-to-cart");
-    }
   };
+  
   return (
     <>
       <div className="single_product_section">
@@ -74,7 +70,7 @@ const SingleProduct = () => {
                 </div>
                 <div>
                   <button className="cart_btn" onClick={addtoCart}>
-                    Buy Now
+                    Add to Cart
                   </button>
                 </div>
               </div>
