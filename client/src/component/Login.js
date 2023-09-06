@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser, resetResp } from "../redux/authSlice";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import OtpVerify from "./password-reset/OtpVerify";
+import ResetPassword from "./password-reset/ResetPassword";
+import SentOtp from "./password-reset/SentOtp";
 
 const Login = () => {
   const {
@@ -49,13 +52,13 @@ const Login = () => {
     setSection(3);
   };
 
-  const verifyOtp = () =>{
-    setSection(4)
-  }
+  const verifyOtp = () => {
+    setSection(4);
+  };
 
-  const passwordReset = (data) =>{
+  const passwordReset = (data) => {
     console.log(data);
-  }
+  };
 
   return (
     <>
@@ -121,104 +124,17 @@ const Login = () => {
                 </>
               ) : section === 2 ? (
                 <>
-                  <div className="send_otp">
-                  <h3>Get OTP</h3>
-                    <p>
-                      Please enter your email address to receive a One-Time
-                      Password (OTP). We'll send the OTP to this email for
-                      verification.
-                    </p>
-                    <form onSubmit={handleSubmit(sendOtpMail)}>
-                      <div className="form_field">
-                        <InputField
-                          id="email"
-                          type="text"
-                          placeholder="Email"
-                          register={register("email", {
-                            required: "Email is required *",
-                            pattern: {
-                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                              message: "Invalid email address",
-                            },
-                          })}
-                          error={errors.email}
-                        />
-                      </div>
-                      <div className="form_field">
-                        <button className="send_btn" type="submit">
-                          submit
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+                  <SentOtp sendOtpMail={sendOtpMail} />
                 </>
-              ): section === 3 ? (<>
-              <div className="send_otp">
-                  <p className="tx-left">Enter Otp :</p>
-                    <form onSubmit={handleSubmit(verifyOtp)}>
-                      <div className="form_field">
-                        <InputField
-                          id="otp"
-                          type="text"
-                          placeholder="OTP"
-                          register={register("otp", {
-                            required: "OTP is required *",
-                          })}
-                          error={errors.otp}
-                        />
-                      </div>
-                      <div className="form_field">
-                        <button className="send_btn" type="submit">
-                          verify
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-              </>) : (<>
-                <div className="password_reset">
-                  <h3 className="tx-left">Enter Password</h3>
-                    <form onSubmit={handleSubmit(passwordReset)}>
-                    <div className="form_field">
-                        <InputField
-                          id="password"
-                          type="text"
-                          placeholder="Password"
-                          register={register("password", {
-                            required: "Password is required *",
-                          })}
-                          error={errors.password}
-                        />
-                      </div>
-                      <div className="form_field">
-                        <InputField
-                          id="newPassword"
-                          type="text"
-                          placeholder="New Password"
-                          register={register("newPassword", {
-                            required: "newPassword is required *",
-                          })}
-                          error={errors.newPassword}
-                        />
-                      </div>
-                      <div className="form_field">
-                        <InputField
-                          id="cpassword"
-                          type="text"
-                          placeholder="Confirm Password"
-                          register={register("cpassword", {
-                            required: "confirm Password is required *",
-                          })}
-                          error={errors.cpassword}
-                        />
-                      </div>
-                      <div className="form_field">
-                        <button className="send_btn" type="submit">
-                          verify
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-              </>)}
+              ) : section === 3 ? (
+                <>
+                  <OtpVerify verifyOtp={verifyOtp} />
+                </>
+              ) : (
+                <>
+                  <ResetPassword passwordReset={passwordReset} />
+                </>
+              )}
             </div>
           </div>
         </div>

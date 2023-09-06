@@ -434,6 +434,7 @@ input[type="search"]:focus {
 }
 input[type="text"],
 input[type="tel"],
+input[type="password"],
 textarea {
   width: 100%;
   padding: 14px 20px;
@@ -606,7 +607,7 @@ input[type="email"] {
 
 /* login page style here */
 .login_section {
-  padding: 45px 0px;
+  padding: 100px 0px;
 }
 .login_page {
   display: flex;

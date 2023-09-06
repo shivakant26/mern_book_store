@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Register from "../../Register";
 import InputField from "../../common/InputField";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +11,6 @@ const UpdateAuthor = ({ show, setShow, editData }) => {
  
   const dispatch = useDispatch();
   const { updateAuthors } = useSelector((state) => state?.auth);
-  console.log(123123, updateAuthors);
   const {
     handleSubmit,
     formState: { errors },
@@ -82,17 +80,6 @@ const UpdateAuthor = ({ show, setShow, editData }) => {
                 error={errors.email}
               />
             </div>
-            {/* <div className="form_field">
-              <InputField
-                id="password"
-                type="text"
-                placeholder="Password"
-                register={register("password", {
-                  required: "Password is required *",
-                })}
-                error={errors.password}
-              />
-            </div> */}
             <div className="form_field radio_btn">
               <label className="lable_ctrl">
                 <input

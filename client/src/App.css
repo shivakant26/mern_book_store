@@ -473,5 +473,26 @@ span.step_num.active{
 }
 .forgot_pwd{
   cursor: pointer;
-  color: blue;
+  color: #44b89d;
+  transition: .4s;
+}
+.forgot_pwd:hover{
+  color: #063547;
+}
+.otp-input-container{
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+.otp-input-container input[type="text"]{
+  width: 55px;
+  text-align: center;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  padding: 9px 0;
+}
+td.active-color {
+  color: green !important;
+  text-transform: capitalize;
 }
