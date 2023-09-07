@@ -1,10 +1,19 @@
 import { useState } from "react";
 import { Table } from "react-bootstrap";
 import ChangePassword from "./model/ChangePassword";
+import { useDispatch, useSelector } from "react-redux";
+import { signleAuthor } from "../../redux/authSlice";
+import { useEffect } from "react";
 
 const Profile = () => {
   const [aStatus, setAStatus] = useState(1);
   const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const { signleUserData } = useSelector((state)=>state?.auth)
+  console.log(signleUserData?.data?.[0])
+  useEffect(()=>{
+    dispatch(signleAuthor())
+  },[dispatch])
 
   const updatePassword = () =>{
     setShow(true)
@@ -21,15 +30,19 @@ const Profile = () => {
           <tbody>
             <tr>
               <th>FullName</th>
-              <td>Admin</td>
+              <td>{signleUserData?.data?.[0]?.fullName}</td>
             </tr>
             <tr>
               <th>Email</th>
-              <td>Admin@gmail.com</td>
+              <td>{signleUserData?.data?.[0]?.email}</td>
             </tr>
             <tr>
               <th>Gender</th>
               <td>male</td>
+            </tr>
+            <tr>
+              <th>Role</th>
+              <td>{signleUserData?.data?.[0]?.role}</td>
             </tr>
             <tr>
               <th>Activity Status</th>

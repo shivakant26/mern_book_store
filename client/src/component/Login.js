@@ -2,12 +2,18 @@ import { useForm } from "react-hook-form";
 import InputField from "./common/InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, resetResp } from "../redux/authSlice";
+import {
+  loginUser,
+  resetResp,
+  sendOtp,
+  updateforgotPassword,
+  verifyOtp,
+} from "../redux/authSlice";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import OtpVerify from "./password-reset/OtpVerify";
 import ResetPassword from "./password-reset/ResetPassword";
 import SentOtp from "./password-reset/SentOtp";
+import OtpVerifySec from "./password-reset/OtpVerify";
 
 const Login = () => {
   const {
@@ -19,7 +25,16 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [section, setSection] = useState(1);
-  const { loginData, loading, error } = useSelector((state) => state?.auth);
+  const [userEmail, setUserEmail] = useState("");
+  const {
+    loginData,
+    sendOtpResp,
+    verifyOtpResp,
+    updateforgotPassResp,
+    loading,
+    error,
+  } = useSelector((state) => state?.auth);
+  console.log("otp response", verifyOtpResp?.data?.message);
 
   useEffect(() => {
     if (loginData?.status === 200) {
@@ -39,6 +54,39 @@ const Login = () => {
     }
   }, [loginData, loading, error, dispatch, navigate]);
 
+  useEffect(() => {
+    if (sendOtpResp?.status === 200) {
+      Swal.fire({
+        icon: "success",
+        text: `${sendOtpResp?.data?.message}`,
+      });
+      dispatch(resetResp());
+      setSection(3);
+    } else if (verifyOtpResp?.status === 200) {
+      Swal.fire({
+        icon: "success",
+        text: `${verifyOtpResp?.data?.message}`,
+      });
+      dispatch(resetResp());
+      setSection(4);
+    } else if (updateforgotPassResp?.status === 200) {
+      Swal.fire({
+        icon: "success",
+        text: `${updateforgotPassResp?.data?.message}`,
+      });
+      setSection(1);
+      setUserEmail("");
+      dispatch(resetResp());
+    } else if (error?.status === 400) {
+      Swal.fire({
+        icon: "error",
+        text: `${error?.data?.message}`,
+      });
+      dispatch(resetResp());
+    } else {
+    }
+  }, [sendOtpResp, verifyOtpResp, updateforgotPassResp, dispatch]);
+
   const onSubmit = (data) => {
     dispatch(loginUser(data));
     reset();
@@ -48,16 +96,22 @@ const Login = () => {
     setSection(2);
   };
 
-  const sendOtpMail = () => {
-    setSection(3);
+  const sendOtpMail = (data) => {
+    setUserEmail(data?.email);
+    dispatch(sendOtp(data));
+    reset();
   };
 
-  const verifyOtp = () => {
-    setSection(4);
+  const otpVerification = (data) => {
+    data.email = userEmail;
+    dispatch(verifyOtp(data));
+    reset();
   };
 
   const passwordReset = (data) => {
-    console.log(data);
+    data.email = userEmail;
+    dispatch(updateforgotPassword(data));
+    reset();
   };
 
   return (
@@ -128,7 +182,7 @@ const Login = () => {
                 </>
               ) : section === 3 ? (
                 <>
-                  <OtpVerify verifyOtp={verifyOtp} />
+                  <OtpVerifySec otpVerification={otpVerification} />
                 </>
               ) : (
                 <>

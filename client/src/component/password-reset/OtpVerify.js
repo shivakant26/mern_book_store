@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 import React, { useRef } from "react";
 
-const OtpVerify = ({ verifyOtp }) => {
+const OtpVerifySec = ({ otpVerification }) => {
   const {
     handleSubmit,
     formState: { errors },
@@ -14,7 +14,7 @@ const OtpVerify = ({ verifyOtp }) => {
       otp: data.otp1 + data.otp2 + data.otp3 + data.otp4,
     };
     console.log(otpValue);
-    verifyOtp(otpValue);
+    otpVerification(otpValue);
   };
 
   const handleInputChange = (index, e) => {
@@ -96,4 +96,4 @@ const OtpVerify = ({ verifyOtp }) => {
   );
 };
 
-export default OtpVerify;
+export default OtpVerifySec;

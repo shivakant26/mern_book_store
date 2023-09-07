@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import InputField from "../common/InputField";
 import { useState } from "react";
 
-const ResetPassword = ({ passwordReset, identity , modifyPassword }) => {
+const ResetPassword = ({ passwordReset, identity, modifyPassword }) => {
   const {
     handleSubmit,
     formState: { errors },
@@ -14,9 +14,21 @@ const ResetPassword = ({ passwordReset, identity , modifyPassword }) => {
   return (
     <>
       <div className="password_reset">
-        <h4 className="tx-left mb-20">Enter Password</h4>
-        <form  onSubmit={identity === "mobile-pass" ? "" : handleSubmit(passwordReset)}>
-          <div className="form_field">
+        {identity === "admin-pass" ? (
+          ""
+        ) : (
+          <h4 className="tx-left mb-20">Enter Password</h4>
+        )}
+
+        <form
+          onSubmit={
+            identity === "admin-pass"
+              ? handleSubmit(modifyPassword)
+              : handleSubmit(passwordReset)
+          }
+        >
+          {identity === "admin-pass" ? (<>
+            <div className="form_field">
             <InputField
               id="password"
               type="text"
@@ -27,11 +39,13 @@ const ResetPassword = ({ passwordReset, identity , modifyPassword }) => {
               error={errors.password}
             />
           </div>
+          </>) : ""}
+          
           <div className="form_field">
             <input
               type={passwordType}
               autoComplete="off"
-              placeholder="password"
+              placeholder="New password"
               {...register("newPassword", {
                 required: true,
               })}
@@ -61,17 +75,11 @@ const ResetPassword = ({ passwordReset, identity , modifyPassword }) => {
               <p className="error">Password Not match</p>
             )}
           </div>
-          {identity === "admin-pass" ? (
-            ""
-          ) : (
-            <>
-              <div className="form_field">
-                <button className="send_btn" type="submit">
-                  password Reset
-                </button>
-              </div>
-            </>
-          )}
+          <div className="form_field">
+            <button className="send_btn" type="submit">
+              {identity === "admin-pass" ? "Change Password" : "Password Reset"}
+            </button>
+          </div>
         </form>
       </div>
     </>

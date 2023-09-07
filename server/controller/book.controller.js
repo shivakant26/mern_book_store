@@ -1,6 +1,6 @@
 const Book = require("./../model/book.model");
 const stripe = require("stripe")( "sk_test_51Mtr7eSBqFv0HNgeWwDtjfcAkN15T6FCDfjeNdAvmGntI4d7nhs2VTdewDHaMjxpqaxEuk2aiWtDmh0UBT3jao1F00gTr5tzyF");
-console.log(process.env.STRIPE_SECRET_KEY)
+// console.log(process.env.STRIPE_SECRET_KEY)
 
 const createBook = async (req, res) => {
   const { bookName, description, authorName, price } = req.body;
