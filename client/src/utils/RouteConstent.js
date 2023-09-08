@@ -1,17 +1,17 @@
 import { lazy } from 'react';
-const SingleUser = lazy(()=> import('../component/dashboard/SingleUser'));
-const SingleBook = lazy(()=> import('../component/dashboard/SingleBook'));
-const SingleProduct =  lazy(()=> import('../component/SingleProduct'));
-const AddToCart = lazy(()=> import('../component/AddCart'));
-const Logout = lazy(()=> import('../component/Logout'));
 const HomePage = lazy(() => import('../pages/index'));
-const Login = lazy(() => import('../component/Login'));
-const Register = lazy(() => import('../component/Register'));
+const Login = lazy(() => import('../component/authentication/Login'));
+const Logout = lazy(()=> import('../component/authentication/Logout'));
 const DashBoard = lazy(() => import('../pages/Dashboard'));
-const Profile = lazy(() => import('../component/dashboard/Profile'));
-const AddBook = lazy(() => import('../component/dashboard/AddBook'));
-const BookList = lazy(() => import('../component/dashboard/BookList'));
-const UserList = lazy(() => import('../component/dashboard/UserList'));
+const AddToCart = lazy(()=> import('../component/products/AddCart'));
+const Register = lazy(() => import('../component/authentication/Register'));
+const SingleProduct =  lazy(()=> import('../component/products/SingleProduct'));
+const AddBook = lazy(() => import('../component/dashboard/book/AddBook'));
+const SingleBook = lazy(()=> import('../component/dashboard/book/SingleBook'));
+const BookLists = lazy(() => import('../component/dashboard/book/BookLists'));
+const Profile = lazy(() => import('../component/dashboard/users/Profile'));
+const UserList = lazy(() => import('../component/dashboard/users/UserList'));
+const SingleUser = lazy(()=> import('../component/dashboard/users/SingleUser'));
 
 
 export const publicRouteArray = [
@@ -62,7 +62,7 @@ export const ProtectdRouteArray = [
     },
     {
         path:"/book-list",
-        component:<BookList />
+        component:<BookLists />
     },
     {
         path:"/user-list",

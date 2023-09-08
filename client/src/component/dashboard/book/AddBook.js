@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import InputField from "../common/InputField";
+import InputField from "../../common/InputField";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewBook, resetBookApi, updateBook } from "../../redux/bookSlice";
+import { addNewBook, resetBookApi, updateBook } from "../../../redux/bookSlice";
 import Swal from "sweetalert2";
-import Thumbnail from "../../assets/images/thumbnail.png";
+import Thumbnail from "../../../assets/images/thumbnail.png";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { baseUrl } from "../../api/apiConstant";
+import { baseUrl } from "../../../api/apiConstant";
 
 const AddBook = () => {
   const {

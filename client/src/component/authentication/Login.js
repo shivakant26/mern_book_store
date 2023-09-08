@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import InputField from "./common/InputField";
+import InputField from "../common/InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,12 +8,12 @@ import {
   sendOtp,
   updateforgotPassword,
   verifyOtp,
-} from "../redux/authSlice";
+} from "../../redux/authSlice";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
-import ResetPassword from "./password-reset/ResetPassword";
-import SentOtp from "./password-reset/SentOtp";
-import OtpVerifySec from "./password-reset/OtpVerify";
+import ResetPassword from "../password-reset/ResetPassword";
+import SentOtp from "../password-reset/SentOtp";
+import OtpVerifySec from "../password-reset/OtpVerify";
 
 const Login = () => {
   const {
@@ -121,7 +121,7 @@ const Login = () => {
           <div className="login_page">
             <div className="left_sec">
               <img
-                src={require("../assets/images/slider-img.png")}
+                src={require("../../assets/images/slider-img.png")}
                 alt="about_image"
               />
             </div>

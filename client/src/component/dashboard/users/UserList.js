@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { FaEdit, FaEye, FaPlus, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { allUsers, deleteAuthor, resetResp } from "../../redux/authSlice";
+import { allUsers, deleteAuthor, resetResp } from "../../../redux/authSlice";
 import Swal from "sweetalert2";
 import { Table } from "react-bootstrap";
-import UpdateAuthor from "./model/UpdateAuthor";
+import UpdateAuthor from "../model/UpdateAuthor";
 
 const UserList = () => {
   const [show, setShow] = useState(false);

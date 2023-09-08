@@ -2,10 +2,10 @@ import { Table } from "react-bootstrap";
 import { useLocation, useParams } from "react-router-dom";
 import {FaUserCircle , FaCalendarAlt , FaComment} from "react-icons/fa";
 import {BiSolidTime} from 'react-icons/bi';
-import { baseUrl } from "../../api/apiConstant";
+import { baseUrl } from "../../../api/apiConstant";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { singleBook } from "../../redux/bookSlice";
+import { singleBook } from "../../../redux/bookSlice";
 
 
 const SingleBook = () => {

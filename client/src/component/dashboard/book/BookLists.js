@@ -2,12 +2,13 @@ import React, { useEffect } from "react";
 import { FaEdit, FaTrash, FaPlus, FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { deleteBook, getallBook, resetBookApi } from "../../redux/bookSlice";
+import { deleteBook, getallBook, resetBookApi } from "../../../redux/bookSlice";
 import Swal from "sweetalert2";
 import { Table } from "react-bootstrap";
-import { baseUrl } from "../../api/apiConstant";
+import { baseUrl } from "../../../api/apiConstant";
+import SwalAlert from "../../notifaction/SwalAlert";
 
-const BookList = () => {
+const BookLists = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { allBook, del_book } = useSelector((state) => state?.book);
@@ -18,10 +19,11 @@ const BookList = () => {
 
   useEffect(() => {
     if (del_book?.status === 200) {
-      Swal.fire({
-        icon: "error",
-        text: `${del_book?.data?.message}`,
-      });
+      // Swal.fire({
+      //   icon: "error",
+      //   text: `${del_book?.data?.message}`,
+      // });
+      <SwalAlert icon={"error"} message={`${del_book?.data?.message}`} />
       dispatch(getallBook());
       dispatch(resetBookApi());
     } else {
@@ -70,6 +72,7 @@ const BookList = () => {
               <th>S.No</th>
               <th>Book Name</th>
               <th>Discription</th>
+              <th>Price</th>
               <th>Image</th>
               <th>Avaibility</th>
               <th>Action</th>
@@ -86,6 +89,7 @@ const BookList = () => {
                       <td className="center-align" title={book.description}>
                         {book.description}
                       </td>
+                      <td className="center-align">{book.price}</td>
                       <td>
                         <img
                           src={baseUrl + book.coverImgUrl}
@@ -135,4 +139,4 @@ const BookList = () => {
   );
 };
 
-export default BookList;
+export default BookLists;

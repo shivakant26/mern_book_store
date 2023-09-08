@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import Qunatity from "./common/Quntity";
+import Qunatity from "../common/Quntity";
 import { useForm } from "react-hook-form";
-import InputField from "./common/InputField";
+import InputField from "../common/InputField";
 import { useNavigate } from "react-router-dom";
 
 const AddToCart = () => {
@@ -112,7 +112,7 @@ const AddToCart = () => {
                         <tr>
                           <td>
                             <img
-                              src={require("../assets/images/cover_book_2.jpg")}
+                              src={require("../../assets/images/cover_book_2.jpg")}
                               height="80px"
                               width="60px"
                               alt="product_image"

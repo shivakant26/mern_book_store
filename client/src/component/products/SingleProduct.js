@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { singleBook } from "../redux/bookSlice";
+import { singleBook } from "../../redux/bookSlice";
 import { useEffect, useState } from "react";
-import { baseUrl } from "../api/apiConstant";
+import { baseUrl } from "../../api/apiConstant";
 import { FaStar } from "react-icons/fa";
-import Qunatity from "./common/Quntity";
+import Qunatity from "../common/Quntity";
 
 const SingleProduct = () => {
   const { id } = useParams();

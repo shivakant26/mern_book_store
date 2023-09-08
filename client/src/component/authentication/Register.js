@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
-import InputField from "./common/InputField";
+import InputField from "../common/InputField";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, resetResp } from "../redux/authSlice";
+import { registerUser, resetResp } from "../../redux/authSlice";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 
@@ -48,7 +48,7 @@ const Register = () => {
           <div className="login_page">
             <div className="left_sec">
               <img
-                src={require("../assets/images/slider-img.png")}
+                src={require("../../assets/images/slider-img.png")}
                 alt="about_image"
               />
             </div>

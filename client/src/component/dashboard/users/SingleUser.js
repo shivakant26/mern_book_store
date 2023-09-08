@@ -4,7 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 const SingleUser = () => {
   const id = useParams();
   const location = useLocation();
-  const receivedItem = location.state.item;
+  const receivedItem = location?.state?.item;
   return (
     <>
       <div className="dash_heading d-flex">

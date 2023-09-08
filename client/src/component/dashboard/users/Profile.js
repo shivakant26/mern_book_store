@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Table } from "react-bootstrap";
-import ChangePassword from "./model/ChangePassword";
+import ChangePassword from "../model/ChangePassword";
 import { useDispatch, useSelector } from "react-redux";
-import { signleAuthor } from "../../redux/authSlice";
+import { signleAuthor } from "../../../redux/authSlice";
 import { useEffect } from "react";
 
 const Profile = () => {
