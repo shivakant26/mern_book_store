@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import ResetPassword from "../password-reset/ResetPassword";
 import SentOtp from "../password-reset/SentOtp";
 import OtpVerifySec from "../password-reset/OtpVerify";
+import SwalAlerts from "../notifaction/SwalAlert";
 
 const Login = () => {
   const {

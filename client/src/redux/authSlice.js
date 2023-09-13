@@ -163,10 +163,11 @@ const authSlice = createSlice({
         state.loading = false;
         if (action.payload.data.role === "admin") {
           localStorage.setItem("admin-token", action.payload.data.token);
+          sessionStorage.setItem("email", action.payload.data.email);
         } else {
           localStorage.setItem("token", action.payload.data.token);
+          sessionStorage.setItem("user-email", action.payload.data.email);
         }
-        sessionStorage.setItem("email", action.payload.data.email);
         state.loginData = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {

@@ -16,7 +16,6 @@ const uploadImage = multer({
     if (mimetype && extname) {
       return cb(null, true);
     }
-
     return cb(
       "this file type not supported, please upload jpeg/jpg/png/pdf  only "
     );

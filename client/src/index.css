@@ -72,13 +72,13 @@ code {
 .section_heading h3 {
   font-size: 32px;
 }
-.w-48{
+.w-48 {
   width: 48%;
 }
-.w-31{
+.w-31 {
   width: 31%;
 }
-.w-100{
+.w-100 {
   width: 100%;
 }
 /* header */
@@ -127,7 +127,8 @@ code {
 .site_menu ul li a:hover {
   color: #44b89d;
 }
-.site_menu ul li span.users ,.mobile_menu ul li span.users {
+.site_menu ul li span.users,
+.mobile_menu ul li span.users {
   color: #fff;
   background: #44b897;
   display: flex;
@@ -137,19 +138,19 @@ code {
   align-items: center;
   border-radius: 50%;
   font-weight: 600;
-  cursor:pointer
+  cursor: pointer;
 }
-.current_users{
+.current_users {
   position: relative;
 }
-.user_submenus{
+.user_submenus {
   position: absolute;
   background: #fff;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   top: 48px;
   z-index: 9;
 }
-.user_submenus ul li a{
+.user_submenus ul li a {
   color: #000 !important;
 }
 input[type="search"] {
@@ -296,7 +297,7 @@ input[type="search"]:focus {
   justify-content: space-between;
   padding: 10px 8px;
 }
-.book_details{
+.book_details {
   width: 65%;
 }
 .book_details h5 {
@@ -324,6 +325,22 @@ input[type="search"]:focus {
   font-weight: 600;
 }
 
+.pagination_btn {
+  justify-content: flex-end;
+  gap: 15px;
+}
+.prv_next_btn {
+  border: 0;
+  background: orange;
+  color: #fff;
+  width: 112px;
+  transition: 0.4s;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+.prv_next_btn:hover{
+  background-color: #063547;
+}
 /* what say section */
 .what_say {
   padding: 30px 0px;
@@ -618,7 +635,9 @@ input[type="email"] {
 .login_page img {
   width: 100%;
 }
-.login_form,.send_otp,.password_reset{
+.login_form,
+.send_otp,
+.password_reset {
   width: 300px;
   margin: auto;
 }
@@ -652,12 +671,15 @@ input[type="email"] {
   .bx-content h1 {
     padding: 0px 120px 0px 0px;
   }
-  .product_details,.checkout_total,.customer_information,.orders{
+  .product_details,
+  .checkout_total,
+  .customer_information,
+  .orders {
     width: 100% !important;
-}
-.customer_address{
-  flex-direction: column-reverse;
-}
+  }
+  .customer_address {
+    flex-direction: column-reverse;
+  }
 }
 
 @media only screen and (max-width: 979px) {
@@ -747,7 +769,7 @@ input[type="email"] {
   .woo_pay {
     width: 35% !important;
     margin-bottom: 15px;
-}
+  }
 }
 
 @media only screen and (max-width: 479px) {
@@ -788,11 +810,11 @@ input[type="email"] {
     gap: 25px;
     flex-direction: column;
     align-content: center;
-}
+  }
 }
 
-@media screen and (max-width: 420px){
+@media screen and (max-width: 420px) {
   .woo_pay {
     width: 70% !important;
-}
+  }
 }

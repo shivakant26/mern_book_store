@@ -6,7 +6,6 @@ import { deleteBook, getallBook, resetBookApi } from "../../../redux/bookSlice";
 import Swal from "sweetalert2";
 import { Table } from "react-bootstrap";
 import { baseUrl } from "../../../api/apiConstant";
-import SwalAlert from "../../notifaction/SwalAlert";
 
 const BookLists = () => {
   const navigate = useNavigate();
@@ -19,11 +18,10 @@ const BookLists = () => {
 
   useEffect(() => {
     if (del_book?.status === 200) {
-      // Swal.fire({
-      //   icon: "error",
-      //   text: `${del_book?.data?.message}`,
-      // });
-      <SwalAlert icon={"error"} message={`${del_book?.data?.message}`} />
+      Swal.fire({
+        icon: "error",
+        text: `${del_book?.data?.message}`,
+      });
       dispatch(getallBook());
       dispatch(resetBookApi());
     } else {

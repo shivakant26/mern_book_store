@@ -1,5 +1,7 @@
 const Book = require("./../model/book.model");
-const stripe = require("stripe")( "sk_test_51Mtr7eSBqFv0HNgeWwDtjfcAkN15T6FCDfjeNdAvmGntI4d7nhs2VTdewDHaMjxpqaxEuk2aiWtDmh0UBT3jao1F00gTr5tzyF");
+const stripe = require("stripe")(
+  "sk_test_51Mtr7eSBqFv0HNgeWwDtjfcAkN15T6FCDfjeNdAvmGntI4d7nhs2VTdewDHaMjxpqaxEuk2aiWtDmh0UBT3jao1F00gTr5tzyF"
+);
 // console.log(process.env.STRIPE_SECRET_KEY)
 
 const createBook = async (req, res) => {
@@ -30,11 +32,16 @@ const createBook = async (req, res) => {
 
 const allBook = async (req, res) => {
   try {
+    // const page = parseInt(req.query.page, 10) || 0;
+    // const limit = parseInt(req.query.limit, 10) || 4;
     // const book = await Book.find().populate("authorName",{fullName:1,_id:0});
-    const book = await Book.find();
+    const book = await Book.find()
+      // .limit(limit)
+      // .skip(limit * page);
     if (book) {
       res.status(200).json({
         data: book,
+        // pagination: { page: page, limit: limit, count: book.length },
         message: "fetch book succussfully",
       });
     } else {
@@ -111,17 +118,16 @@ const updateBook = async (req, res) => {
 };
 
 const createSession = async (req, res) => {
-  console.log("shuiva")
   // try {
-    const { success_url, cancel_url, price, quantity, mode } = req.body;
+  const { success_url, cancel_url, price, quantity, mode } = req.body;
 
-    const session = await stripe.checkout.sessions.create({
-      success_url,
-      cancel_url,
-      line_items: [{ price, quantity }],
-      mode,
-    });
-    res.json(session);
+  const session = await stripe.checkout.sessions.create({
+    success_url,
+    cancel_url,
+    line_items: [{ price, quantity }],
+    mode,
+  });
+  res.json(session);
   // } catch (err) {
   //   res.json(err);
   // }

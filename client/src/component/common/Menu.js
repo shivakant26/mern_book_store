@@ -6,14 +6,13 @@ import { MenuLinkData } from "../../utils/constent";
 
 const Menu = ({ userAuth }) => {
   const [showMenu, setShowMenu] = useState(false);
-
+  const currentUser = sessionStorage.getItem("user-email")
   const userLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/login"
   };
 
   return (
-    <>
       <ul>
         {MenuLinkData?.map((menuItem, index) => {
           return (
@@ -50,7 +49,7 @@ const Menu = ({ userAuth }) => {
         </li>
         {userAuth && (
           <li className="current_users" onClick={() => setShowMenu(!showMenu)}>
-            <span className="users">S</span>
+            <span className="users">{currentUser?.charAt(0)}</span>
             {showMenu && (
               <div className="user_submenus">
                 <ul>
@@ -63,7 +62,6 @@ const Menu = ({ userAuth }) => {
           </li>
         )}
       </ul>
-    </>
   );
 };
 

@@ -163,7 +163,6 @@ const changePassword = async (req, res) => {
   const { password, newPassword } = req.body;
   try {
     const { _id } = req.user;
-    console.log(_id);
     if (!password || !newPassword) {
       return res.status(400).json({
         message: "all fields are require",

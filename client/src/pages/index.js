@@ -2,12 +2,12 @@ import React from "react";
 import BookCategory from "../component/home/BookCategory";
 import About from "../component/home/About";
 import WhatSay from "../component/home/WhatSay";
-import Blog from "../component/home/Blog";
 import ContactUs from "../component/home/Contactus";
 import Banner from "../component/home/Banner";
 import { Link } from "react-router-dom";
 import BestBookSeller from "../component/home/BestBookSeller";
-import Fade from "react-reveal/Fade"; 
+import Fade from "react-reveal/Fade";
+import Blog from "../component/blog/Blog";
 const HomePage = () => {
   return (
     <>
@@ -42,4 +42,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
